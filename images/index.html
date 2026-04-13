@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MyGeoVerse — Free Trial Offer</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #060810;
+    --deep: #0b0f1e;
+    --card: #111827;
+    --border: rgba(255,255,255,0.08);
+    --white: #f0f4ff;
+    --dim: rgba(240,244,255,0.55);
+    --accent: #00e5ff;
+    --accent2: #7c5cfc;
+    --accent3: #00ffb2;
+    --glow: rgba(0,229,255,0.18);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Background grid */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,229,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,229,255,0.03) 1px, transparent 1px);
+    background-size: 48px 48px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Orb glow backgrounds */
+  .orb1 {
+    position: fixed;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(124,92,252,0.12) 0%, transparent 70%);
+    top: -200px; right: -200px;
+    pointer-events: none; z-index: 0;
+  }
+  .orb2 {
+    position: fixed;
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,229,255,0.08) 0%, transparent 70%);
+    bottom: 100px; left: -150px;
+    pointer-events: none; z-index: 0;
+  }
+
+  .page {
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 60px 40px 80px;
+  }
+
+  /* ── HEADER ── */
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 72px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards;
+  }
+
+  .logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 18px;
+    letter-spacing: 0.04em;
+    color: var(--white);
+  }
+  .logo span { color: var(--accent); }
+
+  .badge {
+    background: linear-gradient(135deg, rgba(0,229,255,0.15), rgba(124,92,252,0.15));
+    border: 1px solid rgba(0,229,255,0.3);
+    border-radius: 100px;
+    padding: 6px 16px;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    margin-bottom: 64px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.15s forwards;
+  }
+
+  .eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+    font-weight: 500;
+  }
+
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(36px, 5vw, 56px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 24px;
+  }
+
+  h1 em {
+    font-style: normal;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-sub {
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--dim);
+    max-width: 600px;
+    font-weight: 300;
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent), var(--accent2), transparent);
+    margin: 48px 0;
+    opacity: 0.4;
+  }
+
+  /* ── WHAT YOU GET ── */
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--dim);
+    margin-bottom: 28px;
+    font-weight: 500;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 48px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.3s forwards;
+  }
+
+  .feature-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s ease, transform 0.3s ease;
+  }
+
+  .feature-card:hover {
+    border-color: rgba(0,229,255,0.25);
+    transform: translateY(-2px);
+  }
+
+  .feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .feature-card:hover::before { opacity: 1; }
+
+  .feature-icon {
+    width: 36px; height: 36px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 17px;
+    margin-bottom: 14px;
+  }
+
+  .icon-blue { background: rgba(0,229,255,0.12); }
+  .icon-purple { background: rgba(124,92,252,0.12); }
+  .icon-green { background: rgba(0,255,178,0.10); }
+  .icon-orange { background: rgba(255,160,50,0.10); }
+  .icon-pink { background: rgba(255,100,150,0.10); }
+
+  .feature-card h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    letter-spacing: 0.01em;
+  }
+
+  .feature-card p {
+    font-size: 13px;
+    color: var(--dim);
+    line-height: 1.6;
+  }
+
+  /* ── DEVICES ROW ── */
+  .devices-row {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 48px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.4s forwards;
+  }
+
+  .device-pill {
+    flex: 1;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .device-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .dot-cyan { background: var(--accent); box-shadow: 0 0 8px var(--accent); }
+  .dot-purple { background: var(--accent2); box-shadow: 0 0 8px var(--accent2); }
+
+  .device-pill strong {
+    font-family: 'Syne', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    display: block;
+    margin-bottom: 2px;
+  }
+  .device-pill span {
+    font-size: 11px;
+    color: var(--dim);
+  }
+
+  /* ── TIMELINE ── */
+  .timeline {
+    margin-bottom: 48px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.45s forwards;
+  }
+
+  .timeline-track {
+    position: relative;
+    display: flex;
+    gap: 0;
+  }
+
+  .timeline-track::before {
+    content: '';
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    right: 20px;
+    height: 1px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2), var(--accent3));
+    opacity: 0.4;
+  }
+
+  .t-step {
+    flex: 1;
+    text-align: center;
+    position: relative;
+  }
+
+  .t-node {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    border: 1px solid rgba(0,229,255,0.4);
+    background: var(--card);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne', sans-serif;
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--accent);
+    margin: 0 auto 12px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .t-node.highlight {
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    color: var(--black);
+    border-color: transparent;
+    box-shadow: 0 0 20px rgba(0,229,255,0.4);
+  }
+
+  .t-label {
+    font-family: 'Syne', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    margin-bottom: 4px;
+    letter-spacing: 0.03em;
+  }
+
+  .t-desc {
+    font-size: 10px;
+    color: var(--dim);
+    line-height: 1.5;
+    padding: 0 4px;
+  }
+
+  /* ── PRICING BOX ── */
+  .pricing-block {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 48px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.5s forwards;
+  }
+
+  .pricing-card {
+    border-radius: 16px;
+    padding: 28px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .pricing-card.free {
+    background: var(--card);
+    border: 1px solid var(--border);
+  }
+
+  .pricing-card.paid {
+    background: linear-gradient(135deg, rgba(0,229,255,0.08), rgba(124,92,252,0.12));
+    border: 1px solid rgba(0,229,255,0.25);
+  }
+
+  .pricing-card.paid::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at top right, rgba(0,229,255,0.06), transparent 60%);
+    pointer-events: none;
+  }
+
+  .pricing-tag {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--dim);
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+
+  .price-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 42px;
+    font-weight: 800;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .price-num.green { color: var(--accent3); }
+  .price-num.cyan { color: var(--accent); }
+
+  .price-period {
+    font-size: 12px;
+    color: var(--dim);
+    margin-bottom: 20px;
+  }
+
+  .price-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .price-list li {
+    font-size: 13px;
+    color: var(--dim);
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+  }
+
+  .price-list li::before {
+    content: '→';
+    color: var(--accent);
+    font-size: 11px;
+    margin-top: 1px;
+    flex-shrink: 0;
+  }
+
+  /* ── CTA ── */
+  .cta-block {
+    background: linear-gradient(135deg, rgba(0,229,255,0.06), rgba(124,92,252,0.1));
+    border: 1px solid rgba(0,229,255,0.2);
+    border-radius: 20px;
+    padding: 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.6s forwards;
+  }
+
+  .cta-block::before {
+    content: '';
+    position: absolute;
+    top: -60px; left: 50%;
+    transform: translateX(-50%);
+    width: 300px; height: 200px;
+    background: radial-gradient(ellipse, rgba(0,229,255,0.12), transparent 70%);
+    pointer-events: none;
+  }
+
+  .cta-block h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 26px;
+    font-weight: 800;
+    margin-bottom: 12px;
+    position: relative;
+  }
+
+  .cta-block p {
+    color: var(--dim);
+    font-size: 14px;
+    line-height: 1.7;
+    max-width: 480px;
+    margin: 0 auto 28px;
+    position: relative;
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+    position: relative;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    color: var(--black);
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    padding: 14px 28px;
+    border-radius: 100px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: opacity 0.2s, transform 0.2s;
+  }
+
+  .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--white);
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    padding: 13px 28px;
+    border-radius: 100px;
+    border: 1px solid rgba(255,255,255,0.2);
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+
+  .btn-secondary:hover { border-color: rgba(255,255,255,0.5); transform: translateY(-1px); }
+
+  /* ── SCARCITY ── */
+  .scarcity {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 20px;
+    font-size: 12px;
+    color: var(--dim);
+    position: relative;
+  }
+
+  .pulse {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--accent3);
+    position: relative;
+  }
+
+  .pulse::after {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border-radius: 50%;
+    border: 1px solid var(--accent3);
+    animation: pulse 2s ease infinite;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    margin-top: 60px;
+    padding-top: 28px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.7s forwards;
+  }
+
+  .footer-logo {
+    font-family: 'Syne', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--dim);
+  }
+  .footer-logo span { color: var(--accent); }
+
+  footer p {
+    font-size: 11px;
+    color: rgba(240,244,255,0.3);
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes pulse {
+    0%   { transform: scale(1); opacity: 1; }
+    100% { transform: scale(2.5); opacity: 0; }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 640px) {
+    .page { padding: 40px 24px 60px; }
+    .features-grid { grid-template-columns: 1fr; }
+    .pricing-block { grid-template-columns: 1fr; }
+    .devices-row { flex-direction: column; }
+    .timeline-track { flex-direction: column; gap: 20px; }
+    .timeline-track::before { display: none; }
+    h1 { font-size: 32px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="orb1"></div>
+<div class="orb2"></div>
+
+<div class="page">
+
+  <!-- HEADER -->
+  <header>
+    <img src="images/MGV_logo.png" alt="MyGeoVerse" style="height:72px;">
+    <div class="badge">Limited Pilot Program</div>
+  </header>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="eyebrow">Spatial AI Avatars · Free Trial</div>
+    <h1>Turn Your Venue Into an<br><em>Intelligent Experience</em></h1>
+    <p class="hero-sub">
+      Deploy AI-powered location-aware guides across your venue — through mobile AR and AI smart glasses — completely free for 14 days. No commitment. No infrastructure. Just results.
+    </p>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- WHAT YOU GET -->
+  <div class="section-label">What's included in your free trial</div>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon icon-blue">🎨</div>
+      <h3>Custom Branded App Skin</h3>
+      <p>Your venue's identity — colors, logo, and tone — wrapped around the full MyGeoVerse experience.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon icon-purple">🧠</div>
+      <h3>Location-Based AI Agent</h3>
+      <p>A purpose-trained AI companion that knows your venue — zones, stories, navigation, and FAQs.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon icon-green">🥽</div>
+      <h3>AI Glasses Voice Companion</h3>
+      <p>Hands-free, fully conversational AI for Ray-Ban Meta, Oakley, and Android XR wearables.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon icon-orange">📱</div>
+      <h3>Full Mobile AR Avatar</h3>
+      <p>3D AI avatar anchored in your space — voice, touch interaction, AR wayfinding, and photo moments.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon icon-pink">📊</div>
+      <h3>Analytics Dashboard</h3>
+      <p>Real-time visitor engagement data — interactions, dwell time, and hotspot activity across your venue.</p>
+    </div>
+    <div class="feature-card" style="background: linear-gradient(135deg, rgba(0,229,255,0.05), rgba(124,92,252,0.07)); border-color: rgba(0,229,255,0.15);">
+      <div class="feature-icon icon-blue">✦</div>
+      <h3>White-Glove Setup</h3>
+      <p>We handle everything — zone mapping, AI training, deployment, and launch. Zero lift on your side.</p>
+    </div>
+  </div>
+
+  <!-- DEVICES -->
+  <div class="section-label">Supported devices</div>
+  <div class="devices-row">
+    <div class="device-pill">
+      <div class="device-dot dot-cyan"></div>
+      <div>
+        <strong>Mobile AR Experience</strong>
+        <span>iOS &amp; Android — Audio + Visual Avatar</span>
+      </div>
+    </div>
+    <div class="device-pill">
+      <div class="device-dot dot-purple"></div>
+      <div>
+        <strong>AI Glasses Voice Mode</strong>
+        <span>Ray-Ban Meta · Oakley · Android XR</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- TIMELINE -->
+  <div class="timeline">
+    <div class="section-label">Your 14-day trial timeline</div>
+    <div class="timeline-track">
+      <div class="t-step">
+        <div class="t-node">D1</div>
+        <div class="t-label">Launch</div>
+        <div class="t-desc">Setup complete. Visitors engage instantly.</div>
+      </div>
+      <div class="t-step">
+        <div class="t-node">D7</div>
+        <div class="t-label">Check-In</div>
+        <div class="t-desc">Mid-trial review. Live data walkthrough.</div>
+      </div>
+      <div class="t-step">
+        <div class="t-node highlight">D10</div>
+        <div class="t-label">Your Data</div>
+        <div class="t-desc">We present your real engagement results.</div>
+      </div>
+      <div class="t-step">
+        <div class="t-node">D13</div>
+        <div class="t-label">Decision</div>
+        <div class="t-desc">Continue or walk away. Zero pressure.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRICING -->
+  <div class="section-label">Simple pricing after your trial</div>
+  <div class="pricing-block">
+    <div class="pricing-card free">
+      <div class="pricing-tag">Trial Period</div>
+      <div class="price-num green">$0</div>
+      <div class="price-period">for 14 days — full access</div>
+      <ul class="price-list">
+        <li>Full platform access</li>
+        <li>Custom AI agent creation</li>
+        <li>Both mobile &amp; glasses modes</li>
+        <li>Analytics dashboard included</li>
+        <li>White-glove onboarding</li>
+      </ul>
+    </div>
+    <div class="pricing-card paid">
+      <div class="pricing-tag">After Trial</div>
+      <div class="price-num cyan">$19.99</div>
+      <div class="price-period">per month — platform access</div>
+      <ul class="price-list">
+        <li>Everything from the trial continues</li>
+        <li>AI usage billed to your own account</li>
+        <li>Full control &amp; ownership of your agent</li>
+        <li>Scale to additional zones anytime</li>
+        <li>Cancel anytime — no contracts</li>
+      </ul>
+    </div>
+    <div class="pricing-card" style="background: linear-gradient(135deg, rgba(255,160,50,0.07), rgba(255,100,50,0.09)); border: 1px solid rgba(255,160,50,0.25);">
+      <div class="pricing-tag">One-Time · End of Trial</div>
+      <div class="price-num" style="color:#ffb347;">$499</div>
+      <div class="price-period">deployment fee — paid once</div>
+      <ul class="price-list">
+        <li>Full production deployment</li>
+        <li>AI agent fine-tuning &amp; QA</li>
+        <li>Zone mapping &amp; spatial setup</li>
+        <li>Staff walkthrough &amp; handoff</li>
+        <li>Paid only if you choose to continue</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-block">
+    <h2>Ready to activate your venue?</h2>
+    <p>
+      We're accepting a limited number of pilot venues this quarter. 
+      Request your free 14-day trial and we'll have your AI agent live within days.
+    </p>
+    <div class="cta-buttons">
+      <a href="#" class="btn-primary">Request Your Free Trial</a>
+      <a href="#" class="btn-secondary">Schedule a Demo</a>
+    </div>
+    <div class="scarcity">
+      <div class="pulse"></div>
+      Limited pilot slots available this quarter
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <img src="images/XRM_logo.png" alt="XR Masters" style="height:80px;">
+    <p>© 2025 MyGeoVerse. All rights reserved.</p>
+  </footer>
+
+</div>
+</body>
+</html>
