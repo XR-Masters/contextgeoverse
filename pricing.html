@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MyGeoVerse Platform — Module Pricing</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #060810;
+    --deep: #0b0f1e;
+    --card: #111827;
+    --border: rgba(255,255,255,0.07);
+    --white: #f0f4ff;
+    --dim: rgba(240,244,255,0.52);
+    --dim2: rgba(240,244,255,0.30);
+    --accent: #00e5ff;
+    --accent2: #7c5cfc;
+    --accent3: #00ffb2;
+    --accent4: #ffb347;
+    --accent5: #ff6496;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image:
+      linear-gradient(rgba(0,229,255,0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,229,255,0.025) 1px, transparent 1px);
+    background-size: 52px 52px;
+    pointer-events: none; z-index: 0;
+  }
+
+  .orb1 {
+    position: fixed; width: 600px; height: 600px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(124,92,252,0.1) 0%, transparent 70%);
+    top: -200px; right: -150px; pointer-events: none; z-index: 0;
+  }
+  .orb2 {
+    position: fixed; width: 500px; height: 500px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,229,255,0.07) 0%, transparent 70%);
+    bottom: 0; left: -150px; pointer-events: none; z-index: 0;
+  }
+
+  .page {
+    position: relative; z-index: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 40px 100px;
+  }
+
+  /* ── HEADER ── */
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 64px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards;
+  }
+
+  .header-left { display: flex; align-items: center; gap: 20px; }
+
+  .badge {
+    background: linear-gradient(135deg, rgba(0,229,255,0.12), rgba(124,92,252,0.12));
+    border: 1px solid rgba(0,229,255,0.25);
+    border-radius: 100px;
+    padding: 6px 16px;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  .header-right {
+    font-size: 12px;
+    color: var(--dim2);
+    text-align: right;
+    line-height: 1.6;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    margin-bottom: 64px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.15s forwards;
+  }
+
+  .eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 18px;
+    font-weight: 500;
+  }
+
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(32px, 4vw, 52px);
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    margin-bottom: 16px;
+  }
+
+  h1 em {
+    font-style: normal;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-sub {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--dim);
+    max-width: 700px;
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(0,229,255,0.3), rgba(124,92,252,0.3), transparent);
+    margin: 52px 0;
+    opacity: 0.5;
+  }
+
+  /* ── LEGEND ── */
+  .legend {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.25s forwards;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--dim);
+  }
+
+  .legend-dot {
+    width: 10px; height: 10px;
+    border-radius: 3px;
+    flex-shrink: 0;
+  }
+
+  /* ── PRICING TABLE ── */
+  .pricing-section {
+    margin-bottom: 60px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards;
+  }
+
+  .pricing-section:nth-child(1) { animation-delay: 0.3s; }
+  .pricing-section:nth-child(2) { animation-delay: 0.35s; }
+  .pricing-section:nth-child(3) { animation-delay: 0.4s; }
+  .pricing-section:nth-child(4) { animation-delay: 0.45s; }
+  .pricing-section:nth-child(5) { animation-delay: 0.5s; }
+
+  .module-label {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 16px;
+    padding: 18px 24px;
+    border-radius: 14px;
+    border-left: 3px solid var(--mod-color, var(--accent));
+    background: var(--card);
+  }
+
+  .module-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    color: var(--black);
+    background: var(--mod-color, var(--accent));
+    padding: 4px 10px;
+    border-radius: 100px;
+  }
+
+  .module-label h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+  }
+
+  .module-label p {
+    font-size: 12px;
+    color: var(--dim);
+    margin-left: auto;
+    max-width: 400px;
+    text-align: right;
+    line-height: 1.5;
+  }
+
+  /* ── TABLE ── */
+  .price-table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+
+  .price-table thead tr {
+    background: rgba(255,255,255,0.04);
+  }
+
+  .price-table th {
+    font-family: 'Syne', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 14px 20px;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+    color: var(--dim2);
+  }
+
+  .price-table th.col-module {
+    text-align: left;
+    width: 28%;
+    color: var(--dim);
+  }
+
+  /* Platform group headers */
+  .price-table th.group-header {
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    padding-bottom: 6px;
+    padding-top: 10px;
+    color: var(--dim2);
+    border-bottom: none;
+  }
+
+  .price-table th.sub-header {
+    font-size: 10px;
+    padding-top: 4px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* Column groups */
+  .col-mobile { border-left: 1px solid rgba(0,229,255,0.12); }
+  .col-rayban { border-left: 1px solid rgba(124,92,252,0.12); }
+  .col-xr     { border-left: 1px solid rgba(0,255,178,0.10); }
+
+  .price-table tbody tr {
+    border-bottom: 1px solid var(--border);
+    transition: background 0.2s;
+  }
+
+  .price-table tbody tr:last-child { border-bottom: none; }
+  .price-table tbody tr:hover { background: rgba(255,255,255,0.025); }
+
+  .price-table td {
+    padding: 16px 20px;
+    font-size: 13px;
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  .price-table td.item-name {
+    text-align: left;
+    font-size: 13px;
+    color: var(--dim);
+    padding-left: 28px;
+  }
+
+  .price-table td.item-name strong {
+    display: block;
+    font-weight: 500;
+    color: var(--white);
+    margin-bottom: 2px;
+  }
+
+  .price-table td.item-name span {
+    font-size: 11px;
+    color: var(--dim2);
+  }
+
+  /* Price cells */
+  .price-setup {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--white);
+  }
+
+  .price-license {
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--dim);
+  }
+
+  .price-na {
+    font-size: 11px;
+    color: rgba(255,255,255,0.2);
+    letter-spacing: 0.06em;
+  }
+
+  .price-covered {
+    font-size: 11px;
+    color: var(--accent3);
+    letter-spacing: 0.02em;
+    font-style: italic;
+    padding: 0 8px;
+    opacity: 0.8;
+  }
+
+  /* Col group background tints */
+  .price-table td.col-mobile { background: rgba(0,229,255,0.02); border-left: 1px solid rgba(0,229,255,0.06); }
+  .price-table td.col-rayban { background: rgba(124,92,252,0.02); border-left: 1px solid rgba(124,92,252,0.06); }
+  .price-table td.col-xr     { background: rgba(0,255,178,0.02);  border-left: 1px solid rgba(0,255,178,0.05); }
+
+  /* ── NOTES ── */
+  .note-row td {
+    background: rgba(255,255,255,0.015) !important;
+    padding: 10px 20px 10px 28px !important;
+  }
+
+  .note-text {
+    font-size: 11px;
+    color: var(--dim2);
+    font-style: italic;
+    line-height: 1.5;
+  }
+
+  /* ── SUMMARY CARDS ── */
+  .summary-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 48px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.55s forwards;
+  }
+
+  .summary-card {
+    border-radius: 16px;
+    padding: 28px;
+    border: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .summary-card.sc-mobile {
+    background: linear-gradient(135deg, rgba(0,229,255,0.05), rgba(0,229,255,0.02));
+    border-color: rgba(0,229,255,0.2);
+  }
+  .summary-card.sc-rayban {
+    background: linear-gradient(135deg, rgba(124,92,252,0.07), rgba(124,92,252,0.03));
+    border-color: rgba(124,92,252,0.22);
+  }
+  .summary-card.sc-xr {
+    background: linear-gradient(135deg, rgba(0,255,178,0.05), rgba(0,255,178,0.02));
+    border-color: rgba(0,255,178,0.18);
+  }
+
+  .summary-card .sc-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+  .sc-mobile .sc-label { color: var(--accent); }
+  .sc-rayban .sc-label { color: var(--accent2); }
+  .sc-xr     .sc-label { color: var(--accent3); }
+
+  .summary-card h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+
+  .summary-card ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+
+  .summary-card ul li {
+    font-size: 12px;
+    color: var(--dim);
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    line-height: 1.5;
+  }
+
+  .summary-card ul li::before {
+    content: '→';
+    font-size: 10px;
+    color: var(--accent);
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
+  .sc-rayban ul li::before { color: var(--accent2); }
+  .sc-xr    ul li::before  { color: var(--accent3); }
+
+  /* ── FOOTER ── */
+  footer {
+    margin-top: 72px;
+    padding-top: 28px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.65s forwards;
+  }
+
+  .footer-note {
+    font-size: 11px;
+    color: var(--dim2);
+    line-height: 1.7;
+    max-width: 560px;
+  }
+
+  footer .copy { font-size: 11px; color: rgba(240,244,255,0.2); white-space: nowrap; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── PRINT ── */
+  @media print {
+    body { background: #fff; color: #000; }
+    body::before, .orb1, .orb2 { display: none; }
+    .page { padding: 20px; }
+    nav, .hero-actions { display: none; }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .page { padding: 40px 20px 80px; }
+    .module-label p { display: none; }
+    .summary-row { grid-template-columns: 1fr; }
+    .price-table th, .price-table td { padding: 12px 10px; font-size: 12px; }
+    .price-table td.item-name { padding-left: 14px; }
+    h1 { font-size: 28px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="orb1"></div>
+<div class="orb2"></div>
+
+<div class="page">
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-left">
+      <img src="images/MGV_logo.png" alt="MyGeoVerse" style="height:60px;">
+      <div class="badge">Internal Pricing Reference</div>
+    </div>
+    <div class="header-right">
+      MyGeoVerse Platform<br>
+      Module Pricing · 2026
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="eyebrow">Platform Module Pricing</div>
+    <h1>MyGeoVerse <em>Module Pricing</em></h1>
+    <p class="hero-sub">
+      All pricing is per module, per platform. Setup fees are one-time. License fees are annual. Modules are independently licensable — build the stack your venue needs.
+      Prices shown in EUR. USD equivalents available on request.
+    </p>
+  </div>
+
+  <!-- LEGEND -->
+  <div class="legend">
+    <div class="legend-item">
+      <div class="legend-dot" style="background:rgba(0,229,255,0.5);"></div>
+      Mobile (iOS &amp; Android)
+    </div>
+    <div class="legend-item">
+      <div class="legend-dot" style="background:rgba(124,92,252,0.5);"></div>
+      Meta Ray-Ban Smart Glasses
+    </div>
+    <div class="legend-item">
+      <div class="legend-dot" style="background:rgba(0,255,178,0.4);"></div>
+      Android XR
+    </div>
+    <div class="legend-item">
+      <div class="legend-dot" style="background:rgba(255,255,255,0.15);"></div>
+      N/A — not available on this platform
+    </div>
+    <div class="legend-item">
+      <div class="legend-dot" style="background:rgba(0,255,178,0.2); border: 1px solid rgba(0,255,178,0.3);"></div>
+      Covered with Spatial Management Module
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- MODULE 1 -->
+  <div class="pricing-section" style="--mod-color: var(--accent);">
+    <div class="module-label">
+      <div class="module-num">01</div>
+      <h2>Spatial Browser Module</h2>
+      <p>The branded app foundation. White-label licensing and custom visual identity across devices.</p>
+    </div>
+    <table class="price-table">
+      <thead>
+        <tr>
+          <th class="col-module" rowspan="2">Sub-Module</th>
+          <th class="group-header col-mobile" colspan="2">📱 Mobile</th>
+          <th class="group-header col-rayban" colspan="2">🕶️ Meta Ray-Ban</th>
+          <th class="group-header col-xr" colspan="2">🥽 Android XR</th>
+        </tr>
+        <tr>
+          <th class="sub-header col-mobile">Setup</th>
+          <th class="sub-header col-mobile">License / yr</th>
+          <th class="sub-header col-rayban">Setup</th>
+          <th class="sub-header col-rayban">License / yr</th>
+          <th class="sub-header col-xr">Setup</th>
+          <th class="sub-header col-xr">License / yr</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="item-name"><strong>a. White Label App Licensing</strong><span>Your brand in the app stores</span></td>
+          <td class="col-mobile"><span class="price-setup">€15,000</span></td>
+          <td class="col-mobile"><span class="price-license">€4,000</span></td>
+          <td class="col-rayban"><span class="price-setup">€15,000</span></td>
+          <td class="col-rayban"><span class="price-license">€4,000</span></td>
+          <td class="col-xr"><span class="price-setup">€15,000</span></td>
+          <td class="col-xr"><span class="price-license">€4,000</span></td>
+        </tr>
+        <tr>
+          <td class="item-name"><strong>b. Custom Skin &amp; Opening Sliders</strong><span>Branded colors, typography &amp; onboarding</span></td>
+          <td class="col-mobile"><span class="price-setup">€4,500</span></td>
+          <td class="col-mobile"><span class="price-license">€1,500</span></td>
+          <td class="col-rayban"><span class="price-na">N/A</span></td>
+          <td class="col-rayban"><span class="price-na">N/A</span></td>
+          <td class="col-xr"><span class="price-na">N/A</span></td>
+          <td class="col-xr"><span class="price-na">N/A</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- MODULE 2 -->
+  <div class="pricing-section" style="--mod-color: var(--accent2);">
+    <div class="module-label">
+      <div class="module-num">02</div>
+      <h2>Spatial Navigation Module</h2>
+      <p>AR wayfinding from simple point-to-point paths to full collision-mesh spatial navigation.</p>
+    </div>
+    <table class="price-table">
+      <thead>
+        <tr>
+          <th class="col-module" rowspan="2">Sub-Module</th>
+          <th class="group-header col-mobile" colspan="2">📱 Mobile</th>
+          <th class="group-header col-rayban" colspan="2">🕶️ Meta Ray-Ban</th>
+          <th class="group-header col-xr" colspan="2">🥽 Android XR</th>
+        </tr>
+        <tr>
+          <th class="sub-header col-mobile">Setup</th>
+          <th class="sub-header col-mobile">License / yr</th>
+          <th class="sub-header col-rayban">Setup</th>
+          <th class="sub-header col-rayban">License / yr</th>
+          <th class="sub-header col-xr">Setup</th>
+          <th class="sub-header col-xr">License / yr</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="item-name"><strong>a. AR Navigation (point-to-point)</strong><span>Curated paths, no collision mesh required</span></td>
+          <td class="col-mobile"><span class="price-setup">€4,500</span></td>
+          <td class="col-mobile"><span class="price-license">€1,500</span></td>
+          <td class="col-rayban"><span class="price-na">N/A</span></td>
+          <td class="col-rayban"><span class="price-na">N/A</span></td>
+          <td class="col-xr"><span class="price-na">N/A</span></td>
+          <td class="col-xr"><span class="price-na">N/A</span></td>
+        </tr>
+        <tr>
+          <td class="item-name"><strong>b. AR Navigation w/ Collision Mesh</strong><span>Full spatial pathfinding with obstacle avoidance</span></td>
+          <td class="col-mobile"><span class="price-setup">€10,000</span></td>
+          <td class="col-mobile"><span class="price-license">€2,000</span></td>
+          <td class="col-rayban"><span class="price-setup">€10,000</span></td>
+          <td class="col-rayban"><span class="price-license">€2,000</span></td>
+          <td class="col-xr"><span class="price-setup">€10,000</span></td>
+          <td class="col-xr"><span class="price-license">€2,000</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- MODULE 3 -->
+  <div class="pricing-section" style="--mod-color: var(--accent3);">
+    <div class="module-label">
+      <div class="module-num">03</div>
+      <h2>Spatial Content Management Module</h2>
+      <p>Upload, place, anchor, and manage all spatial content. Includes Creators Studio, AI Agent Studio, and location-aware customization.</p>
+    </div>
+    <table class="price-table">
+      <thead>
+        <tr>
+          <th class="col-module" rowspan="2">Sub-Module</th>
+          <th class="group-header col-mobile" colspan="2">📱 Mobile</th>
+          <th class="group-header col-rayban" colspan="6">🕶️ Meta Ray-Ban &amp; 🥽 Android XR</th>
+        </tr>
+        <tr>
+          <th class="sub-header col-mobile">Setup</th>
+          <th class="sub-header col-mobile">License / yr</th>
+          <th class="sub-header col-rayban" colspan="6" style="text-align:center; color: var(--accent3); font-size:10px;">Coverage Note</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="item-name"><strong>a. Content Uploading &amp; Placement</strong><span>3D objects, video, audio &amp; interactive elements</span></td>
+          <td class="col-mobile"><span class="price-setup">€950</span></td>
+          <td class="col-mobile"><span class="price-license">€600</span></td>
+          <td class="col-rayban" colspan="6"><span class="price-covered">Covered with Spatial Management Module</span></td>
+        </tr>
+        <tr>
+          <td class="item-name"><strong>b. Remote Placement (GPS)</strong><span>Deploy content to any location remotely</span></td>
+          <td class="col-mobile"><span class="price-setup">€950</span></td>
+          <td class="col-mobile"><span class="price-license">€600</span></td>
+          <td class="col-rayban" colspan="6"><span class="price-covered">Covered with Spatial Management Module</span></td>
+        </tr>
+        <tr>
+          <td class="item-name"><strong>c. VPS / Cloud Anchor Localization</strong><span>Sub-centimeter content persistence</span></td>
+          <td class="col-mobile"><span class="price-setup">€950</span></td>
+          <td class="col-mobile"><span class="price-license">€600</span></td>
+          <td class="col-rayban" colspan="6"><span class="price-covered">Covered with Spatial Management Module</span></td>
+        </tr>
+        <tr>
+          <td class="item-name"><strong>d. Creators Studio Access</strong><span>No-code spatial scene builder</span></td>
+          <td class="col-mobile"><span class="price-setup">€1,950</span></td>
+          <td class="col-mobile"><span class="price-license">€1,200</span></td>
+          <td class="col-rayban" colspan="6"><span class="price-covered">Covered with Spatial Management Module</span></td>
+        </tr>
+        <tr>
+          <td class="item-name"><strong>e. AI Agent Studio Access</strong><span>Train &amp; deploy conversational AI agents</span></td>
+          <td class="col-mobile"><span class="price-setup">€1,950</span></td>
+          <td class="col-mobile"><span class="price-license">€1,200</span></td>
+          <td class="col-rayban" colspan="6"><span class="price-covered">Covered with Spatial Management Module</span></td>
+        </tr>
+        <tr>
+          <td class="item-name"><strong>f. Location-Based Customization</strong><span>Zone-level personalization &amp; content variation</span></td>
+          <td class="col-mobile"><span class="price-setup">€950</span></td>
+          <td class="col-mobile"><span class="price-license">€600</span></td>
+          <td class="col-rayban" colspan="6"><span class="price-covered">Covered with Spatial Management Module</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- MODULE 4 -->
+  <div class="pricing-section" style="--mod-color: var(--accent4);">
+    <div class="module-label">
+      <div class="module-num">04</div>
+      <h2>Spatial Revenue Module</h2>
+      <p>Location-triggered advertising and AR commerce stops. Monetize every square metre of your venue.</p>
+    </div>
+    <table class="price-table">
+      <thead>
+        <tr>
+          <th class="col-module" rowspan="2">Sub-Module</th>
+          <th class="group-header col-mobile" colspan="2">📱 Mobile</th>
+          <th class="group-header col-rayban" colspan="2">🕶️ Meta Ray-Ban</th>
+          <th class="group-header col-xr" colspan="2">🥽 Android XR</th>
+        </tr>
+        <tr>
+          <th class="sub-header col-mobile">Setup</th>
+          <th class="sub-header col-mobile">License / yr</th>
+          <th class="sub-header col-rayban">Setup</th>
+          <th class="sub-header col-rayban">License / yr</th>
+          <th class="sub-header col-xr">Setup</th>
+          <th class="sub-header col-xr">License / yr</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="item-name"><strong>a. Spatial Ads</strong><span>Location-triggered contextual AR advertising</span></td>
+          <td class="col-mobile"><span class="price-setup">€1,800</span></td>
+          <td class="col-mobile"><span class="price-license">€1,200</span></td>
+          <td class="col-rayban"><span class="price-setup">€1,800</span></td>
+          <td class="col-rayban"><span class="price-license">€1,200</span></td>
+          <td class="col-xr"><span class="price-setup">€1,800</span></td>
+          <td class="col-xr"><span class="price-license">€1,200</span></td>
+        </tr>
+        <tr>
+          <td class="item-name"><strong>b. AR Stops</strong><span>Interactive AR commerce destinations in-venue</span></td>
+          <td class="col-mobile"><span class="price-setup">€1,800</span></td>
+          <td class="col-mobile"><span class="price-license">€1,200</span></td>
+          <td class="col-rayban"><span class="price-setup">€1,800</span></td>
+          <td class="col-rayban"><span class="price-license">€1,200</span></td>
+          <td class="col-xr"><span class="price-setup">€1,800</span></td>
+          <td class="col-xr"><span class="price-license">€1,200</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- MODULE 5 -->
+  <div class="pricing-section" style="--mod-color: var(--accent5);">
+    <div class="module-label">
+      <div class="module-num">05</div>
+      <h2>Spatial Payment Module</h2>
+      <p>Native in-experience transactions — direct purchases and a branded virtual currency ecosystem.</p>
+    </div>
+    <table class="price-table">
+      <thead>
+        <tr>
+          <th class="col-module" rowspan="2">Sub-Module</th>
+          <th class="group-header col-mobile" colspan="2">📱 Mobile</th>
+          <th class="group-header col-rayban" colspan="2">🕶️ Meta Ray-Ban</th>
+          <th class="group-header col-xr" colspan="2">🥽 Android XR</th>
+        </tr>
+        <tr>
+          <th class="sub-header col-mobile">Setup</th>
+          <th class="sub-header col-mobile">License / yr</th>
+          <th class="sub-header col-rayban">Setup</th>
+          <th class="sub-header col-rayban">License / yr</th>
+          <th class="sub-header col-xr">Setup</th>
+          <th class="sub-header col-xr">License / yr</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="item-name"><strong>a. In-App Purchases</strong><span>Direct in-experience transactions across platforms</span></td>
+          <td class="col-mobile"><span class="price-setup">€1,800</span></td>
+          <td class="col-mobile"><span class="price-license">€1,200</span></td>
+          <td class="col-rayban"><span class="price-setup">€1,800</span></td>
+          <td class="col-rayban"><span class="price-license">€1,200</span></td>
+          <td class="col-xr"><span class="price-setup">€1,800</span></td>
+          <td class="col-xr"><span class="price-license">€1,200</span></td>
+        </tr>
+        <tr>
+          <td class="item-name"><strong>b. In-App Currency</strong><span>Branded virtual token economy for your venue</span></td>
+          <td class="col-mobile"><span class="price-setup">€1,800</span></td>
+          <td class="col-mobile"><span class="price-license">€1,200</span></td>
+          <td class="col-rayban" colspan="4"><span class="price-covered">Covered with Spatial Management Module</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- PLATFORM SUMMARY CARDS -->
+  <div style="margin-bottom: 20px;">
+    <div class="eyebrow" style="font-size:10px; letter-spacing:0.22em; color: var(--dim2); font-weight:500; text-transform:uppercase;">Platform Summary</div>
+  </div>
+  <div class="summary-row">
+    <div class="summary-card sc-mobile">
+      <div class="sc-label">Mobile · iOS &amp; Android</div>
+      <h3>Full Platform Access</h3>
+      <ul>
+        <li>All 5 modules available</li>
+        <li>Complete feature set including Custom Skin, point-to-point navigation, and In-App Currency</li>
+        <li>Content Management sub-modules priced individually</li>
+        <li>Highest deployment flexibility</li>
+      </ul>
+    </div>
+    <div class="summary-card sc-rayban">
+      <div class="sc-label">Meta Ray-Ban Smart Glasses</div>
+      <h3>Glasses-Native Modules</h3>
+      <ul>
+        <li>White Label App Licensing</li>
+        <li>Collision Mesh Navigation</li>
+        <li>Spatial Revenue (Ads + AR Stops)</li>
+        <li>In-App Purchases</li>
+        <li>Content Management covered in bundle</li>
+        <li>Custom Skin &amp; point-to-point nav: N/A</li>
+      </ul>
+    </div>
+    <div class="summary-card sc-xr">
+      <div class="sc-label">Android XR</div>
+      <h3>XR Platform Modules</h3>
+      <ul>
+        <li>White Label App Licensing</li>
+        <li>Collision Mesh Navigation</li>
+        <li>Spatial Revenue (Ads + AR Stops)</li>
+        <li>In-App Purchases</li>
+        <li>Content Management covered in bundle</li>
+        <li>Custom Skin &amp; point-to-point nav: N/A</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <img src="images/XRM_logo.png" alt="XR Masters" style="height:64px; opacity:0.6;">
+    <p class="footer-note">
+      All prices are in EUR and exclude applicable taxes. Setup fees are one-time and non-refundable.
+      Annual license fees are billed at the start of each contract year. Module pricing is subject to change —
+      this document reflects rates current as of 2026. For custom or bundled pricing, contact the MyGeoVerse team.
+    </p>
+    <p class="copy">© 2026 MyGeoVerse · Internal Use Only</p>
+  </footer>
+
+</div>
+</body>
+</html>
