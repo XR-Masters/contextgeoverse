@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MyGeoVerse — Platform Packages</title>
+<meta name="description" content="Choose the MyGeoVerse package that fits your venue. From first spatial deployment to full monetization — modular, scalable, built for every stage.">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #060810;
+    --deep: #0b0f1e;
+    --card: #111827;
+    --border: rgba(255,255,255,0.07);
+    --white: #f0f4ff;
+    --dim: rgba(240,244,255,0.52);
+    --dim2: rgba(240,244,255,0.28);
+    --accent: #00e5ff;
+    --accent2: #7c5cfc;
+    --accent3: #00ffb2;
+    --accent4: #ffb347;
+    --accent5: #ff6496;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image:
+      linear-gradient(rgba(0,229,255,0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,229,255,0.025) 1px, transparent 1px);
+    background-size: 52px 52px;
+    pointer-events: none; z-index: 0;
+  }
+
+  .orb1 { position: fixed; width: 700px; height: 700px; border-radius: 50%; background: radial-gradient(circle, rgba(124,92,252,0.1) 0%, transparent 70%); top: -300px; right: -200px; pointer-events: none; z-index: 0; }
+  .orb2 { position: fixed; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle, rgba(0,229,255,0.07) 0%, transparent 70%); bottom: 0; left: -100px; pointer-events: none; z-index: 0; }
+  .orb3 { position: fixed; width: 400px; height: 400px; border-radius: 50%; background: radial-gradient(circle, rgba(0,255,178,0.05) 0%, transparent 70%); bottom: 200px; right: 50px; pointer-events: none; z-index: 0; }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(6,8,16,0.88);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 40px;
+  }
+  .nav-inner {
+    max-width: 1140px; margin: 0 auto; height: 64px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-logo img { height: 38px; display: block; }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 0.04em; color: var(--dim); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--white); }
+  .nav-cta { background: linear-gradient(135deg, var(--accent), var(--accent2)); color: var(--black) !important; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 12px; letter-spacing: 0.07em; padding: 10px 22px; border-radius: 100px; text-decoration: none; transition: opacity 0.2s, transform 0.2s; }
+  .nav-cta:hover { opacity: 0.88; transform: translateY(-1px); }
+
+  /* ── PAGE ── */
+  .page { position: relative; z-index: 1; max-width: 1140px; margin: 0 auto; padding: 0 40px 100px; }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 88px 0 72px;
+    text-align: center;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.1s forwards;
+  }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--accent); font-weight: 500; margin-bottom: 22px;
+  }
+  .eyebrow::before, .eyebrow::after {
+    content: ''; display: block; width: 20px; height: 1px;
+    background: var(--accent); opacity: 0.5;
+  }
+
+  h1 {
+    font-family: 'Syne', sans-serif; font-weight: 800;
+    font-size: clamp(38px, 5vw, 62px); line-height: 1.04;
+    letter-spacing: -0.025em; margin-bottom: 22px;
+  }
+  h1 em { font-style: normal; background: linear-gradient(90deg, var(--accent), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+  .hero-sub { font-size: 17px; line-height: 1.75; color: var(--dim); max-width: 580px; margin: 0 auto 16px; }
+
+  .hero-note { font-size: 13px; color: var(--dim2); margin-top: 8px; }
+
+  /* ── DIVIDER ── */
+  .divider { height: 1px; background: linear-gradient(90deg, transparent, rgba(0,229,255,0.28), rgba(124,92,252,0.28), transparent); margin: 64px 0; opacity: 0.5; }
+
+  /* ── PACKAGES GRID ── */
+  .packages-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 16px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.25s forwards;
+  }
+
+  .package-card {
+    border-radius: 22px;
+    padding: 36px 32px 32px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease;
+  }
+  .package-card:hover { transform: translateY(-4px); }
+
+  /* CORE */
+  .pkg-core {
+    background: var(--card);
+    border: 1px solid var(--border);
+  }
+
+  /* PRO — featured */
+  .pkg-pro {
+    background: linear-gradient(160deg, #0f1a2e 0%, #0b1220 100%);
+    border: 1px solid rgba(0,229,255,0.35);
+    box-shadow: 0 0 60px rgba(0,229,255,0.08), 0 24px 60px rgba(0,0,0,0.5);
+  }
+  .pkg-pro::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at top center, rgba(0,229,255,0.07), transparent 60%);
+    pointer-events: none;
+  }
+
+  /* REVENUE */
+  .pkg-revenue {
+    background: linear-gradient(160deg, #160f22 0%, #0f0a18 100%);
+    border: 1px solid rgba(124,92,252,0.3);
+    box-shadow: 0 0 40px rgba(124,92,252,0.07), 0 20px 50px rgba(0,0,0,0.4);
+  }
+  .pkg-revenue::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at top right, rgba(124,92,252,0.08), transparent 60%);
+    pointer-events: none;
+  }
+
+  /* POPULAR badge */
+  .popular-badge {
+    position: absolute;
+    top: 0; left: 50%; transform: translateX(-50%);
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    color: var(--black);
+    font-family: 'Syne', sans-serif;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 5px 20px;
+    border-radius: 0 0 14px 14px;
+  }
+
+  .pkg-tier {
+    font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+    font-weight: 600; margin-bottom: 10px; margin-top: 8px;
+  }
+  .pkg-core .pkg-tier { color: var(--accent); }
+  .pkg-pro .pkg-tier { color: var(--accent); }
+  .pkg-revenue .pkg-tier { color: var(--accent2); }
+
+  .pkg-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 26px; font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 6px;
+    position: relative;
+  }
+
+  .pkg-tagline {
+    font-size: 13px; color: var(--dim); line-height: 1.55;
+    margin-bottom: 24px; position: relative;
+  }
+
+  /* Platform pills */
+  .pkg-platforms {
+    display: flex; gap: 6px; flex-wrap: wrap;
+    margin-bottom: 28px; position: relative;
+  }
+  .plat-pill {
+    font-size: 10px; font-weight: 600; letter-spacing: 0.04em;
+    padding: 4px 11px; border-radius: 100px;
+    display: inline-flex; align-items: center; gap: 5px;
+  }
+  .plat-mobile { background: rgba(0,229,255,0.1); border: 1px solid rgba(0,229,255,0.25); color: var(--accent); }
+  .plat-rayban { background: rgba(124,92,252,0.1); border: 1px solid rgba(124,92,252,0.25); color: #a48cfc; }
+  .plat-xr { background: rgba(0,255,178,0.08); border: 1px solid rgba(0,255,178,0.2); color: var(--accent3); }
+  .plat-soon { opacity: 0.55; }
+
+  /* Price block */
+  .pkg-price-block {
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 22px 0;
+    margin-bottom: 28px;
+    position: relative;
+  }
+
+  .price-row {
+    display: flex; align-items: baseline; gap: 6px; margin-bottom: 6px;
+  }
+
+  .price-label {
+    font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--dim2); font-weight: 500; width: 72px; flex-shrink: 0;
+  }
+
+  .price-num {
+    font-family: 'Syne', sans-serif; font-weight: 800;
+    font-size: 30px; line-height: 1; letter-spacing: -0.02em;
+  }
+  .price-num.setup { color: var(--white); }
+  .price-num.annual { font-size: 24px; color: var(--dim); }
+
+  .price-suffix { font-size: 12px; color: var(--dim2); margin-left: 2px; }
+
+  .price-saving {
+    display: inline-flex; align-items: center; gap: 6px;
+    margin-top: 12px;
+    font-size: 11px; color: var(--accent3);
+    background: rgba(0,255,178,0.07);
+    border: 1px solid rgba(0,255,178,0.18);
+    padding: 4px 12px; border-radius: 100px;
+  }
+  .price-saving::before { content: '↓'; font-weight: 700; }
+
+  /* Includes list */
+  .pkg-includes {
+    flex: 1; position: relative;
+    margin-bottom: 28px;
+  }
+
+  .includes-label {
+    font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--dim2); font-weight: 500; margin-bottom: 14px;
+  }
+
+  .module-group {
+    margin-bottom: 14px;
+  }
+
+  .module-group-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 0.04em;
+    margin-bottom: 6px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .mg-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+
+  .module-group ul { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+
+  .module-group ul li {
+    font-size: 12px; color: var(--dim); line-height: 1.5;
+    display: flex; align-items: flex-start; gap: 7px; padding-left: 14px;
+  }
+  .module-group ul li::before { content: '—'; color: var(--dim2); font-size: 10px; margin-top: 2px; flex-shrink: 0; }
+
+  /* CTA button */
+  .pkg-btn {
+    display: block; text-align: center; text-decoration: none;
+    font-family: 'Syne', sans-serif; font-weight: 700;
+    font-size: 13px; letter-spacing: 0.06em;
+    padding: 15px 24px; border-radius: 100px;
+    transition: opacity 0.2s, transform 0.2s;
+    position: relative;
+  }
+  .pkg-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+
+  .pkg-core .pkg-btn { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18); color: var(--white); }
+  .pkg-core .pkg-btn:hover { background: rgba(255,255,255,0.12); }
+  .pkg-pro .pkg-btn { background: linear-gradient(135deg, var(--accent), var(--accent2)); color: var(--black); border: none; }
+  .pkg-revenue .pkg-btn { background: linear-gradient(135deg, var(--accent2), #a855f7); color: var(--white); border: none; }
+
+  /* ── ENTERPRISE ROW ── */
+  .enterprise-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 40px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 32px 36px;
+    margin-bottom: 80px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.4s forwards;
+  }
+
+  .ent-left h3 {
+    font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800;
+    letter-spacing: -0.01em; margin-bottom: 6px;
+  }
+  .ent-left p { font-size: 14px; color: var(--dim); line-height: 1.6; max-width: 600px; }
+
+  .ent-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+  .ent-tag {
+    font-size: 11px; font-weight: 500;
+    padding: 4px 12px; border-radius: 100px;
+    border: 1px solid rgba(255,255,255,0.12);
+    color: var(--dim);
+  }
+
+  .ent-btn {
+    white-space: nowrap;
+    background: transparent;
+    color: var(--white);
+    font-family: 'Syne', sans-serif; font-weight: 700;
+    font-size: 13px; letter-spacing: 0.06em;
+    padding: 14px 28px; border-radius: 100px;
+    border: 1px solid rgba(255,255,255,0.22);
+    text-decoration: none;
+    transition: border-color 0.2s, transform 0.2s;
+    flex-shrink: 0;
+  }
+  .ent-btn:hover { border-color: rgba(255,255,255,0.5); transform: translateY(-1px); }
+
+  /* ── COMPARISON TABLE ── */
+  .comparison-section {
+    margin-bottom: 80px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.45s forwards;
+  }
+
+  .section-eyebrow {
+    font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase;
+    color: var(--dim2); font-weight: 500; margin-bottom: 10px;
+  }
+
+  .section-title {
+    font-family: 'Syne', sans-serif; font-weight: 800;
+    font-size: clamp(24px, 2.8vw, 34px);
+    letter-spacing: -0.02em; line-height: 1.1;
+    margin-bottom: 12px;
+  }
+
+  .section-sub { font-size: 15px; color: var(--dim); line-height: 1.7; max-width: 560px; margin-bottom: 36px; }
+
+  .comp-table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    overflow: hidden;
+  }
+
+  .comp-table thead tr { background: rgba(255,255,255,0.03); }
+
+  .comp-table th {
+    font-family: 'Syne', sans-serif;
+    font-size: 12px; font-weight: 700; letter-spacing: 0.06em;
+    padding: 18px 20px; text-align: center;
+    border-bottom: 1px solid var(--border);
+    color: var(--dim);
+  }
+  .comp-table th.col-feature { text-align: left; width: 35%; color: var(--dim2); font-size: 10px; letter-spacing: 0.16em; }
+
+  .th-core { color: var(--accent) !important; }
+  .th-pro  { color: var(--accent) !important; background: rgba(0,229,255,0.04); }
+  .th-rev  { color: var(--accent2) !important; }
+
+  .comp-table tbody tr { border-bottom: 1px solid rgba(255,255,255,0.04); transition: background 0.2s; }
+  .comp-table tbody tr:last-child { border-bottom: none; }
+  .comp-table tbody tr:hover { background: rgba(255,255,255,0.02); }
+
+  .comp-table tr.group-row td {
+    background: rgba(255,255,255,0.025);
+    padding: 10px 20px;
+    font-family: 'Syne', sans-serif;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--dim2);
+  }
+  .comp-table tr.group-row td:first-child { display: flex; align-items: center; gap: 10px; }
+
+  .comp-table td {
+    padding: 14px 20px;
+    font-size: 13px; vertical-align: middle;
+    text-align: center;
+  }
+  .comp-table td.col-feature {
+    text-align: left;
+    color: var(--dim);
+    padding-left: 28px;
+  }
+  .comp-table td.col-feature strong { display: block; font-weight: 500; color: var(--white); font-size: 13px; margin-bottom: 2px; }
+  .comp-table td.col-feature span { font-size: 11px; color: var(--dim2); }
+
+  .comp-table td.col-pro { background: rgba(0,229,255,0.025); }
+
+  .check { color: var(--accent3); font-size: 16px; }
+  .check-purple { color: var(--accent2); font-size: 16px; }
+  .dash { color: rgba(255,255,255,0.15); font-size: 14px; }
+  .partial { font-size: 11px; color: var(--accent4); }
+  .multi-plat { font-size: 10px; color: var(--dim2); display: block; margin-top: 2px; }
+
+  /* ── WHY PACKAGES ── */
+  .why-section {
+    margin-bottom: 80px;
+    opacity: 0;
+    animation: fadeUp 0.7s ease 0.5s forwards;
+  }
+
+  .why-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+    margin-top: 36px;
+  }
+
+  .why-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px;
+    transition: border-color 0.3s, transform 0.25s;
+  }
+  .why-card:hover { border-color: rgba(0,229,255,0.2); transform: translateY(-2px); }
+
+  .why-icon { font-size: 28px; margin-bottom: 16px; display: block; }
+
+  .why-card h3 {
+    font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700;
+    margin-bottom: 8px; letter-spacing: 0.01em;
+  }
+  .why-card p { font-size: 13px; color: var(--dim); line-height: 1.65; }
+
+  /* ── CTA ── */
+  .cta-section {
+    background: linear-gradient(135deg, rgba(0,229,255,0.05), rgba(124,92,252,0.1));
+    border: 1px solid rgba(0,229,255,0.18);
+    border-radius: 24px;
+    padding: 72px 60px;
+    text-align: center;
+    position: relative; overflow: hidden;
+    opacity: 0; animation: fadeUp 0.7s ease 0.55s forwards;
+  }
+  .cta-section::before {
+    content: ''; position: absolute; top: -80px; left: 50%; transform: translateX(-50%);
+    width: 400px; height: 300px;
+    background: radial-gradient(ellipse, rgba(0,229,255,0.1), transparent 70%);
+    pointer-events: none;
+  }
+  .cta-section h2 { font-family: 'Syne', sans-serif; font-size: clamp(24px, 3vw, 38px); font-weight: 800; letter-spacing: -0.02em; margin-bottom: 14px; position: relative; }
+  .cta-section h2 em { font-style: normal; background: linear-gradient(90deg, var(--accent), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .cta-section p { font-size: 15px; color: var(--dim); line-height: 1.7; max-width: 480px; margin: 0 auto 32px; position: relative; }
+
+  .cta-buttons { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; position: relative; }
+  .btn-primary { background: linear-gradient(135deg, var(--accent), var(--accent2)); color: var(--black); font-family: 'Syne', sans-serif; font-weight: 700; font-size: 13px; letter-spacing: 0.06em; padding: 15px 30px; border-radius: 100px; border: none; cursor: pointer; text-decoration: none; display: inline-block; transition: opacity 0.2s, transform 0.2s; }
+  .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+  .btn-ghost { background: transparent; color: var(--white); font-family: 'Syne', sans-serif; font-weight: 600; font-size: 13px; letter-spacing: 0.06em; padding: 14px 30px; border-radius: 100px; border: 1px solid rgba(255,255,255,0.18); cursor: pointer; text-decoration: none; display: inline-block; transition: border-color 0.2s, transform 0.2s; }
+  .btn-ghost:hover { border-color: rgba(255,255,255,0.45); transform: translateY(-1px); }
+
+  /* ── FOOTER ── */
+  footer {
+    margin-top: 72px; padding-top: 32px;
+    border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap;
+  }
+  .footer-logo img { height: 48px; opacity: 0.65; display: block; }
+  .footer-links { display: flex; gap: 24px; list-style: none; }
+  .footer-links a { font-size: 12px; color: var(--dim2); text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--dim); }
+  footer .copy { font-size: 11px; color: rgba(240,244,255,0.22); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(22px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 0 24px; }
+    .nav-links { display: none; }
+    .page { padding: 0 24px 80px; }
+    .hero { padding: 60px 0 48px; }
+    h1 { font-size: 34px; }
+    .packages-grid { grid-template-columns: 1fr; }
+    .enterprise-row { grid-template-columns: 1fr; }
+    .why-grid { grid-template-columns: 1fr; }
+    .cta-section { padding: 48px 28px; }
+    .comp-table th, .comp-table td { padding: 12px 10px; font-size: 12px; }
+    .comp-table td.col-feature { padding-left: 14px; }
+    footer { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<div class="orb1"></div>
+<div class="orb2"></div>
+<div class="orb3"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html"><img src="images/MGV_logo.png" alt="MyGeoVerse"></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Platform</a></li>
+      <li><a href="index.html#modules">Modules</a></li>
+      <li><a href="packages.html" class="active">Packages</a></li>
+      <li><a href="index.html#devices">Devices</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+    <a href="index.html#contact" class="nav-cta">Talk to Us</a>
+  </div>
+</nav>
+
+<div class="page">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="eyebrow">Spatial Packages</div>
+    <h1>Pick your <em>spatial stack.</em><br>Scale when you're ready.</h1>
+    <p class="hero-sub">
+      Every MyGeoVerse package bundles the modules your venue actually needs — at a price that rewards commitment. Start lean. Expand as your spatial ambition grows.
+    </p>
+    <p class="hero-note">All packages: one-time setup + annual license · Modules are independently upgradeable</p>
+  </section>
+
+  <!-- PACKAGE CARDS -->
+  <div class="packages-grid" id="packages">
+
+    <!-- CORE -->
+    <div class="package-card pkg-core">
+      <div class="pkg-tier">Spatial Core</div>
+      <div class="pkg-name">CORE</div>
+      <p class="pkg-tagline">Your venue, spatially alive. Launch a branded, AI-powered spatial experience on mobile — fast, without complexity.</p>
+
+      <div class="pkg-platforms">
+        <span class="plat-pill plat-mobile">📱 Mobile</span>
+      </div>
+
+      <div class="pkg-price-block">
+        <div class="price-row">
+          <span class="price-label">Setup</span>
+          <span class="price-num setup">€21,500</span>
+          <span class="price-suffix">one-time</span>
+        </div>
+        <div class="price-row">
+          <span class="price-label">Annual</span>
+          <span class="price-num annual">€7,200</span>
+          <span class="price-suffix">/ year</span>
+        </div>
+        <div class="price-saving">Saves ~€1,300/yr vs. à la carte</div>
+      </div>
+
+      <div class="pkg-includes">
+        <div class="includes-label">What's included</div>
+
+        <div class="module-group">
+          <div class="module-group-name"><span class="mg-dot" style="background:var(--accent);"></span>Spatial Browser</div>
+          <ul>
+            <li>White Label App Licensing</li>
+            <li>Custom Skin &amp; Opening Sliders</li>
+          </ul>
+        </div>
+
+        <div class="module-group">
+          <div class="module-group-name"><span class="mg-dot" style="background:var(--accent3);"></span>Content Management</div>
+          <ul>
+            <li>Content Uploading &amp; Placement</li>
+            <li>Remote Placement (GPS)</li>
+            <li>VPS / Cloud Anchor Localization</li>
+            <li>AI Agent Studio</li>
+            <li>Location-Based Customization</li>
+          </ul>
+        </div>
+      </div>
+
+      <a href="index.html#contact" class="pkg-btn">Get Started with Core</a>
+    </div>
+
+    <!-- PRO -->
+    <div class="package-card pkg-pro">
+      <div class="popular-badge">Most Popular</div>
+      <div class="pkg-tier">Spatial Pro</div>
+      <div class="pkg-name">PRO</div>
+      <p class="pkg-tagline">Navigate visitors through your venue at scale — across mobile and the next generation of AI glasses platforms.</p>
+
+      <div class="pkg-platforms">
+        <span class="plat-pill plat-mobile">📱 Mobile</span>
+        <span class="plat-pill plat-rayban plat-soon">🕶️ Ray-Ban Meta</span>
+        <span class="plat-pill plat-xr plat-soon">🥽 Android XR</span>
+      </div>
+
+      <div class="pkg-price-block">
+        <div class="price-row">
+          <span class="price-label">Setup</span>
+          <span class="price-num setup">€34,500</span>
+          <span class="price-suffix">one-time</span>
+        </div>
+        <div class="price-row">
+          <span class="price-label">Annual</span>
+          <span class="price-num annual">€12,500</span>
+          <span class="price-suffix">/ year</span>
+        </div>
+        <div class="price-saving">Saves ~€21,750 setup vs. à la carte</div>
+      </div>
+
+      <div class="pkg-includes">
+        <div class="includes-label">Everything in Core, plus</div>
+
+        <div class="module-group">
+          <div class="module-group-name"><span class="mg-dot" style="background:var(--accent3);"></span>Content Management · Full Suite</div>
+          <ul>
+            <li>Creators Studio Access</li>
+            <li>+ all Core content modules</li>
+          </ul>
+        </div>
+
+        <div class="module-group">
+          <div class="module-group-name"><span class="mg-dot" style="background:var(--accent2);"></span>Spatial Navigation</div>
+          <ul>
+            <li>AR Navigation w/ Collision Mesh</li>
+            <li>Across Mobile, Ray-Ban &amp; Android XR</li>
+          </ul>
+        </div>
+
+        <div class="module-group">
+          <div class="module-group-name"><span class="mg-dot" style="background:var(--accent2);"></span>Glasses Platform Bundle</div>
+          <ul>
+            <li>Content Management covered on Ray-Ban &amp; Android XR</li>
+          </ul>
+        </div>
+      </div>
+
+      <a href="index.html#contact" class="pkg-btn">Get Started with Pro</a>
+    </div>
+
+    <!-- REVENUE -->
+    <div class="package-card pkg-revenue">
+      <div class="pkg-tier">Spatial Revenue</div>
+      <div class="pkg-name">REVENUE</div>
+      <p class="pkg-tagline">The complete spatial business stack. Engage visitors, navigate them, then monetize every interaction across every platform.</p>
+
+      <div class="pkg-platforms">
+        <span class="plat-pill plat-mobile">📱 Mobile</span>
+        <span class="plat-pill plat-rayban plat-soon">🕶️ Ray-Ban Meta</span>
+        <span class="plat-pill plat-xr plat-soon">🥽 Android XR</span>
+      </div>
+
+      <div class="pkg-price-block">
+        <div class="price-row">
+          <span class="price-label">Setup</span>
+          <span class="price-num setup">€49,500</span>
+          <span class="price-suffix">one-time</span>
+        </div>
+        <div class="price-row">
+          <span class="price-label">Annual</span>
+          <span class="price-num annual">€19,500</span>
+          <span class="price-suffix">/ year</span>
+        </div>
+        <div class="price-saving">Saves ~€24,750 setup vs. à la carte</div>
+      </div>
+
+      <div class="pkg-includes">
+        <div class="includes-label">Everything in Pro, plus</div>
+
+        <div class="module-group">
+          <div class="module-group-name"><span class="mg-dot" style="background:var(--accent4);"></span>Spatial Revenue</div>
+          <ul>
+            <li>Spatial Ads — all platforms</li>
+            <li>AR Stops — all platforms</li>
+          </ul>
+        </div>
+
+        <div class="module-group">
+          <div class="module-group-name"><span class="mg-dot" style="background:var(--accent5);"></span>Spatial Payment</div>
+          <ul>
+            <li>In-App Purchases — all platforms</li>
+            <li>In-App Currency — Mobile</li>
+          </ul>
+        </div>
+      </div>
+
+      <a href="index.html#contact" class="pkg-btn">Get Started with Revenue</a>
+    </div>
+
+  </div>
+
+  <!-- ENTERPRISE ROW -->
+  <div class="enterprise-row">
+    <div class="ent-left">
+      <h3>Enterprise &amp; Multi-Venue</h3>
+      <p>Running multiple sites, a franchise network, or a smart city deployment? We scope custom module selections, multi-venue licensing agreements, dedicated onboarding teams, and SLA-backed support — sized to your operation.</p>
+      <div class="ent-tags">
+        <span class="ent-tag">Multi-venue licensing</span>
+        <span class="ent-tag">Custom module selection</span>
+        <span class="ent-tag">Dedicated onboarding</span>
+        <span class="ent-tag">Priority SLA support</span>
+        <span class="ent-tag">White-glove deployment</span>
+      </div>
+    </div>
+    <a href="mailto:hello@contextgeoverse.com" class="ent-btn">Contact for Enterprise Pricing</a>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- COMPARISON TABLE -->
+  <section class="comparison-section" id="compare">
+    <div class="section-eyebrow">Package Comparison</div>
+    <div class="section-title">What's in every package</div>
+    <p class="section-sub">Every sub-module, every platform — mapped to the package that includes it.</p>
+
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th class="col-feature">Module / Feature</th>
+          <th class="th-core">CORE</th>
+          <th class="th-pro col-pro">PRO</th>
+          <th class="th-rev">REVENUE</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <!-- SPATIAL BROWSER -->
+        <tr class="group-row">
+          <td colspan="4">
+            <span style="width:8px;height:8px;border-radius:50%;background:var(--accent);display:inline-block;"></span>
+            Spatial Browser Module
+          </td>
+        </tr>
+        <tr>
+          <td class="col-feature"><strong>White Label App Licensing</strong><span>📱 Mobile</span></td>
+          <td><span class="check">✓</span></td>
+          <td class="col-pro"><span class="check">✓</span></td>
+          <td><span class="check">✓</span></td>
+        </tr>
+        <tr>
+          <td class="col-feature"><strong>Custom Skin &amp; Opening Sliders</strong><span>📱 Mobile only</span></td>
+          <td><span class="check">✓</span></td>
+          <td class="col-pro"><span class="check">✓</span></td>
+          <td><span class="check">✓</span></td>
+        </tr>
+
+        <!-- SPATIAL NAVIGATION -->
+        <tr class="group-row">
+          <td colspan="4">
+            <span style="width:8px;height:8px;border-radius:50%;background:var(--accent2);display:inline-block;"></span>
+            Spatial Navigation Module
+          </td>
+        </tr>
+        <tr>
+          <td class="col-feature"><strong>AR Navigation · Point-to-Point</strong><span>📱 Mobile only</span></td>
+          <td><span class="dash">—</span></td>
+          <td class="col-pro"><span class="dash">—</span></td>
+          <td><span class="dash">—</span></td>
+        </tr>
+        <tr>
+          <td class="col-feature"><strong>AR Navigation · Collision Mesh</strong><span>📱 🕶️ 🥽 All platforms</span></td>
+          <td><span class="dash">—</span></td>
+          <td class="col-pro"><span class="check">✓</span></td>
+          <td><span class="check">✓</span></td>
+        </tr>
+
+        <!-- SPATIAL CONTENT MANAGEMENT -->
+        <tr class="group-row">
+          <td colspan="4">
+            <span style="width:8px;height:8px;border-radius:50%;background:var(--accent3);display:inline-block;"></span>
+            Spatial Content Management Module
+          </td>
+        </tr>
+        <tr>
+          <td class="col-feature"><strong>Content Uploading &amp; Placement</strong><span>📱 Mobile · Covered on glasses in Pro+</span></td>
+          <td><span class="check">✓</span></td>
+          <td class="col-pro"><span class="check">✓</span></td>
+          <td><span class="check">✓</span></td>
+        </tr>
+        <tr>
+          <td class="col-feature"><strong>Remote Placement (GPS)</strong><span>📱 Mobile · Covered on glasses in Pro+</span></td>
+          <td><span class="check">✓</span></td>
+          <td class="col-pro"><span class="check">✓</span></td>
+          <td><span class="check">✓</span></td>
+        </tr>
+        <tr>
+          <td class="col-feature"><strong>VPS / Cloud Anchor Localization</strong><span>📱 Mobile · Covered on glasses in Pro+</span></td>
+          <td><span class="check">✓</span></td>
+          <td class="col-pro"><span class="check">✓</span></td>
+          <td><span class="check">✓</span></td>
+        </tr>
+        <tr>
+          <td class="col-feature"><strong>Creators Studio Access</strong><span>📱 Mobile · Covered on glasses in Pro+</span></td>
+          <td><span class="dash">—</span></td>
+          <td class="col-pro"><span class="check">✓</span></td>
+          <td><span class="check">✓</span></td>
+        </tr>
+        <tr>
+          <td class="col-feature"><strong>AI Agent Studio Access</strong><span>📱 Mobile · Covered on glasses in Pro+</span></td>
+          <td><span class="check">✓</span></td>
+          <td class="col-pro"><span class="check">✓</span></td>
+          <td><span class="check">✓</span></td>
+        </tr>
+        <tr>
+          <td class="col-feature"><strong>Location-Based Customization</strong><span>📱 Mobile · Covered on glasses in Pro+</span></td>
+          <td><span class="check">✓</span></td>
+          <td class="col-pro"><span class="check">✓</span></td>
+          <td><span class="check">✓</span></td>
+        </tr>
+
+        <!-- SPATIAL REVENUE -->
+        <tr class="group-row">
+          <td colspan="4">
+            <span style="width:8px;height:8px;border-radius:50%;background:var(--accent4);display:inline-block;"></span>
+            Spatial Revenue Module
+          </td>
+        </tr>
+        <tr>
+          <td class="col-feature"><strong>Spatial Ads</strong><span>📱 🕶️ 🥽 All platforms</span></td>
+          <td><span class="dash">—</span></td>
+          <td class="col-pro"><span class="dash">—</span></td>
+          <td><span class="check check-purple">✓</span></td>
+        </tr>
+        <tr>
+          <td class="col-feature"><strong>AR Stops</strong><span>📱 🕶️ 🥽 All platforms</span></td>
+          <td><span class="dash">—</span></td>
+          <td class="col-pro"><span class="dash">—</span></td>
+          <td><span class="check check-purple">✓</span></td>
+        </tr>
+
+        <!-- SPATIAL PAYMENT -->
+        <tr class="group-row">
+          <td colspan="4">
+            <span style="width:8px;height:8px;border-radius:50%;background:var(--accent5);display:inline-block;"></span>
+            Spatial Payment Module
+          </td>
+        </tr>
+        <tr>
+          <td class="col-feature"><strong>In-App Purchases</strong><span>📱 🕶️ 🥽 All platforms</span></td>
+          <td><span class="dash">—</span></td>
+          <td class="col-pro"><span class="dash">—</span></td>
+          <td><span class="check check-purple">✓</span></td>
+        </tr>
+        <tr>
+          <td class="col-feature"><strong>In-App Currency</strong><span>📱 Mobile · Covered on glasses</span></td>
+          <td><span class="dash">—</span></td>
+          <td class="col-pro"><span class="dash">—</span></td>
+          <td><span class="check check-purple">✓</span></td>
+        </tr>
+
+      </tbody>
+    </table>
+  </section>
+
+  <!-- WHY PACKAGES -->
+  <section class="why-section">
+    <div class="section-eyebrow">Why Packages</div>
+    <div class="section-title">Built to grow with you</div>
+    <p class="section-sub">Every package is designed around real deployment patterns — not an upsell funnel.</p>
+
+    <div class="why-grid">
+      <div class="why-card">
+        <span class="why-icon">🧩</span>
+        <h3>Modular by design</h3>
+        <p>Packages are bundles of the same independently-priced modules. Move from Core to Pro — or add individual modules à la carte — without rebuilding anything.</p>
+      </div>
+      <div class="why-card">
+        <span class="why-icon">💶</span>
+        <h3>Real bundle savings</h3>
+        <p>Multi-platform navigation across three device classes would cost over €56,000 at module price. PRO packages all three at €34,500. That's the value of committing to a stack.</p>
+      </div>
+      <div class="why-card">
+        <span class="why-icon">🚀</span>
+        <h3>White-glove launch included</h3>
+        <p>Every package comes with full MyGeoVerse deployment support — zone mapping, AI agent training, device setup, and a live handoff to your team. Not an optional add-on.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <h2>Not sure which<br><em>package fits?</em></h2>
+    <p>Tell us about your venue and your goals. We'll map the right modules to your use case and show you exactly what you'll get — before you commit to anything.</p>
+    <div class="cta-buttons">
+      <a href="mailto:hello@contextgeoverse.com" class="btn-primary">Talk to the Team</a>
+      <a href="https://ai.contextgeoverse.com" class="btn-ghost">Try Free for 14 Days</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo"><img src="images/XRM_logo.png" alt="XR Masters"></div>
+    <ul class="footer-links">
+      <li><a href="index.html">Platform</a></li>
+      <li><a href="index.html#modules">Modules</a></li>
+      <li><a href="packages.html">Packages</a></li>
+      <li><a href="https://ai.contextgeoverse.com">Free Trial</a></li>
+      <li><a href="mailto:hello@contextgeoverse.com">Contact</a></li>
+    </ul>
+    <p class="copy">© 2026 MyGeoVerse · ContextGeoVerse. All rights reserved.</p>
+  </footer>
+
+</div>
+</body>
+</html>
