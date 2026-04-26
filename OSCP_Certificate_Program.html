@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OSCP Certification Program — Framework Document</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0d1117;
+    --ink-mid: #1e2a3a;
+    --ink-dim: #4a5568;
+    --rule: #e2e8f0;
+    --rule-dark: #cbd5e1;
+    --white: #ffffff;
+    --page: #f8fafc;
+    --l1: #1456f5;
+    --l1-bg: #eff4ff;
+    --l2: #0e9f6e;
+    --l2-bg: #ecfdf5;
+    --l3: #b45309;
+    --l3-bg: #fffbeb;
+    --oarc: #6b7280;
+    --accent: #1456f5;
+    --font-display: 'DM Serif Display', Georgia, serif;
+    --font-body: 'DM Sans', sans-serif;
+    --font-mono: 'DM Mono', monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--page);
+    color: var(--ink);
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  /* PAGE SHELL */
+  .page-wrap {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 2rem 6rem;
+  }
+
+  /* COVER */
+  .cover {
+    padding: 5rem 0 4rem;
+    border-bottom: 1px solid var(--rule-dark);
+    margin-bottom: 4rem;
+  }
+
+  .cover-meta {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+    margin-bottom: 1.5rem;
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .cover-meta span { color: var(--accent); }
+
+  .cover h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.2rem, 5vw, 3.6rem);
+    line-height: 1.1;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.01em;
+  }
+
+  .cover h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .cover-sub {
+    font-size: 1.05rem;
+    color: var(--ink-dim);
+    margin-top: 1rem;
+    max-width: 600px;
+  }
+
+  .cover-badges {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .badge {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.85rem;
+    border-radius: 3px;
+    font-weight: 500;
+  }
+
+  .badge-oarc { background: var(--ink); color: white; }
+  .badge-v { background: var(--rule); color: var(--ink-dim); }
+  .badge-status { background: var(--l1-bg); color: var(--l1); border: 1px solid #bfdbfe; }
+
+  /* TOC */
+  .toc {
+    background: var(--white);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 2rem;
+    margin-bottom: 4rem;
+  }
+
+  .toc-title {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+    margin-bottom: 1.25rem;
+  }
+
+  .toc ol { list-style: none; counter-reset: toc; }
+  .toc li {
+    counter-increment: toc;
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    padding: 0.3rem 0;
+    border-bottom: 1px dashed var(--rule);
+    font-size: 0.9rem;
+  }
+  .toc li:last-child { border-bottom: none; }
+  .toc li::before {
+    content: counter(toc, decimal-leading-zero);
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--ink-dim);
+    flex-shrink: 0;
+    width: 2rem;
+  }
+  .toc a { color: var(--ink); text-decoration: none; }
+  .toc a:hover { color: var(--accent); }
+  .toc .pg { margin-left: auto; font-family: var(--font-mono); font-size: 0.7rem; color: var(--ink-dim); }
+
+  /* SECTIONS */
+  .section {
+    margin-bottom: 4rem;
+  }
+
+  .section-label {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+
+  h2 {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    line-height: 1.2;
+    color: var(--ink);
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--rule-dark);
+  }
+
+  h3 {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    color: var(--ink);
+    margin: 1.5rem 0 0.5rem;
+  }
+
+  h4 {
+    font-family: var(--font-body);
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+    margin: 1.25rem 0 0.5rem;
+  }
+
+  p {
+    color: var(--ink-mid);
+    margin-bottom: 0.85rem;
+    max-width: 68ch;
+  }
+
+  ul, ol {
+    margin: 0.5rem 0 1rem 1.25rem;
+    color: var(--ink-mid);
+  }
+
+  li { margin-bottom: 0.3rem; }
+
+  strong { color: var(--ink); font-weight: 600; }
+
+  /* LEVEL CARDS */
+  .levels-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--rule-dark);
+    border: 1px solid var(--rule-dark);
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 1.5rem 0;
+  }
+
+  .level-card {
+    background: var(--white);
+    padding: 1.75rem 1.5rem;
+  }
+
+  .level-num {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  .level-card.l1 .level-num { color: var(--l1); }
+  .level-card.l2 .level-num { color: var(--l2); }
+  .level-card.l3 .level-num { color: var(--l3); }
+
+  .level-title {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .level-card.l1 .level-title { color: var(--l1); }
+  .level-card.l2 .level-title { color: var(--l2); }
+  .level-card.l3 .level-title { color: var(--l3); }
+
+  .level-credential {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.06em;
+    color: var(--ink-dim);
+    margin-bottom: 1rem;
+  }
+
+  .level-card p {
+    font-size: 0.83rem;
+    line-height: 1.6;
+    max-width: none;
+  }
+
+  .level-meta {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .meta-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.78rem;
+  }
+
+  .meta-label { color: var(--ink-dim); }
+  .meta-val { font-weight: 600; color: var(--ink); }
+
+  /* LEVEL DETAIL SECTIONS */
+  .level-detail {
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 1.5rem 0 2.5rem;
+  }
+
+  .level-detail-header {
+    padding: 1.5rem 2rem;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .level-detail.l1 .level-detail-header { background: var(--l1-bg); border-bottom: 1px solid #bfdbfe; }
+  .level-detail.l2 .level-detail-header { background: var(--l2-bg); border-bottom: 1px solid #a7f3d0; }
+  .level-detail.l3 .level-detail-header { background: var(--l3-bg); border-bottom: 1px solid #fde68a; }
+
+  .level-detail-header h3 {
+    margin: 0;
+    font-size: 1.1rem;
+  }
+  .level-detail.l1 h3 { color: var(--l1); }
+  .level-detail.l2 h3 { color: var(--l2); }
+  .level-detail.l3 h3 { color: var(--l3); }
+
+  .level-detail-body {
+    padding: 1.75rem 2rem;
+    background: var(--white);
+  }
+
+  .duration-pill {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    padding: 0.3rem 0.75rem;
+    border-radius: 100px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .level-detail.l1 .duration-pill { background: #dbeafe; color: var(--l1); }
+  .level-detail.l2 .duration-pill { background: #d1fae5; color: var(--l2); }
+  .level-detail.l3 .duration-pill { background: #fef3c7; color: var(--l3); }
+
+  /* SESSION TABLE */
+  .session-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+    margin: 1rem 0;
+  }
+
+  .session-table th {
+    text-align: left;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+    padding: 0.5rem 0.75rem;
+    border-bottom: 1px solid var(--rule-dark);
+    background: var(--page);
+    font-family: var(--font-mono);
+    font-weight: 500;
+  }
+
+  .session-table td {
+    padding: 0.65rem 0.75rem;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+    color: var(--ink-mid);
+  }
+
+  .session-table tr:last-child td { border-bottom: none; }
+
+  .session-table td:first-child {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--ink-dim);
+    white-space: nowrap;
+    width: 60px;
+  }
+
+  .session-table td:nth-child(2) {
+    font-weight: 500;
+    color: var(--ink);
+    width: 220px;
+  }
+
+  .break-row td { background: var(--page); font-style: italic; font-size: 0.8rem; color: var(--ink-dim) !important; }
+
+  /* COMPETENCY TABLE */
+  .comp-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.83rem;
+    margin: 1rem 0;
+  }
+
+  .comp-table th {
+    text-align: left;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+    padding: 0.5rem 0.75rem;
+    border-bottom: 2px solid var(--rule-dark);
+    font-family: var(--font-mono);
+  }
+
+  .comp-table td {
+    padding: 0.6rem 0.75rem;
+    border-bottom: 1px solid var(--rule);
+    color: var(--ink-mid);
+    vertical-align: top;
+  }
+
+  .comp-table tr:last-child td { border-bottom: none; }
+  .comp-table td:first-child { font-weight: 600; color: var(--ink); width: 200px; }
+
+  .tag {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    padding: 0.15rem 0.5rem;
+    border-radius: 3px;
+    margin: 0.1rem;
+  }
+
+  .tag-l1 { background: var(--l1-bg); color: var(--l1); }
+  .tag-l2 { background: var(--l2-bg); color: var(--l2); }
+  .tag-l3 { background: var(--l3-bg); color: var(--l3); }
+  .tag-req { background: #f1f5f9; color: var(--ink-dim); }
+
+  /* ASSESSMENT BOX */
+  .assessment-box {
+    background: var(--page);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 1.25rem 1.5rem;
+    margin: 1rem 0;
+  }
+
+  .assessment-box h4 { margin-top: 0; }
+
+  /* PATHWAY DIAGRAM */
+  .pathway-diagram {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin: 2rem 0;
+    background: var(--white);
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .path-step {
+    flex: 1;
+    padding: 1.5rem 1.25rem;
+    border-right: 1px solid var(--rule);
+    position: relative;
+  }
+
+  .path-step:last-child { border-right: none; }
+
+  .path-step::after {
+    content: '→';
+    position: absolute;
+    right: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--ink-dim);
+    font-size: 1rem;
+    z-index: 1;
+  }
+
+  .path-step:last-child::after { display: none; }
+
+  .path-level {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+  }
+
+  .path-step.l1 .path-level { color: var(--l1); }
+  .path-step.l2 .path-level { color: var(--l2); }
+  .path-step.l3 .path-level { color: var(--l3); }
+
+  .path-name {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .path-cert {
+    font-size: 0.75rem;
+    color: var(--ink-dim);
+    font-family: var(--font-mono);
+  }
+
+  /* GOVERNANCE TABLE */
+  .gov-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.83rem;
+    margin: 1rem 0;
+  }
+
+  .gov-table th {
+    text-align: left;
+    padding: 0.5rem 1rem;
+    border-bottom: 1px solid var(--rule-dark);
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+    font-family: var(--font-mono);
+  }
+
+  .gov-table td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+    color: var(--ink-mid);
+  }
+
+  .gov-table td:first-child { font-weight: 600; color: var(--ink); width: 200px; }
+  .gov-table tr:last-child td { border-bottom: none; }
+
+  /* CALLOUT */
+  .callout {
+    border-left: 3px solid var(--accent);
+    padding: 1rem 1.25rem;
+    background: var(--l1-bg);
+    border-radius: 0 6px 6px 0;
+    margin: 1.5rem 0;
+    font-size: 0.88rem;
+    color: var(--ink-mid);
+  }
+
+  .callout strong { color: var(--l1); }
+
+  /* FOOTER */
+  .doc-footer {
+    border-top: 1px solid var(--rule-dark);
+    padding-top: 2rem;
+    margin-top: 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 1rem;
+    font-size: 0.78rem;
+    color: var(--ink-dim);
+    font-family: var(--font-mono);
+  }
+
+  @media (max-width: 700px) {
+    .levels-grid { grid-template-columns: 1fr; }
+    .pathway-diagram { flex-direction: column; }
+    .path-step { border-right: none; border-bottom: 1px solid var(--rule); }
+    .path-step::after { display: none; }
+    .session-table th:nth-child(3), .session-table td:nth-child(3) { display: none; }
+  }
+
+  @media print {
+    body { background: white; font-size: 13px; }
+    .page-wrap { max-width: 100%; }
+  }
+</style>
+</head>
+<body>
+<div class="page-wrap">
+
+  <!-- COVER -->
+  <div class="cover">
+    <div class="cover-meta">
+      <span>Open AR Cloud Association</span>
+      <span>Document Type: Program Framework</span>
+      <span>Version: <span>1.0 — Draft</span></span>
+      <span>Date: <span>April 2026</span></span>
+    </div>
+    <h1>OSCP Certification<br><em>Program Framework</em></h1>
+    <p class="cover-sub">A three-level professional certification program in Open Spatial Computing, issued by the Open AR Cloud Association (OARC). This document defines the program structure, curriculum, assessment criteria, and governance for all three certification levels.</p>
+    <div class="cover-badges">
+      <span class="badge badge-oarc">OARC Official</span>
+      <span class="badge badge-v">OSCP Standards Aligned</span>
+      <span class="badge badge-status">Level 1 Ready · L2/L3 In Design</span>
+    </div>
+  </div>
+
+  <!-- TOC -->
+  <div class="toc">
+    <div class="toc-title">Table of Contents</div>
+    <ol>
+      <li><a href="#overview">Program Overview & Vision</a><span class="pg">§1</span></li>
+      <li><a href="#levels">Certification Level Summary</a><span class="pg">§2</span></li>
+      <li><a href="#level1">Level 1 — Foundations</a><span class="pg">§3</span></li>
+      <li><a href="#level2">Level 2 — Builder</a><span class="pg">§4</span></li>
+      <li><a href="#level3">Level 3 — Architect</a><span class="pg">§5</span></li>
+      <li><a href="#assessment">Assessment & Certification Process</a><span class="pg">§6</span></li>
+      <li><a href="#delivery">Delivery Formats</a><span class="pg">§7</span></li>
+      <li><a href="#governance">Governance & Standards Alignment</a><span class="pg">§8</span></li>
+      <li><a href="#roadmap">Rollout Roadmap</a><span class="pg">§9</span></li>
+    </ol>
+  </div>
+
+  <!-- §1 OVERVIEW -->
+  <div class="section" id="overview">
+    <div class="section-label">Section 01</div>
+    <h2>Program Overview & Vision</h2>
+    <p>The <strong>OSCP Certification Program</strong> is the world's first professional certification in Open Spatial Computing, issued by the Open AR Cloud Association (OARC). It establishes a globally recognized credential framework for individuals who understand, build upon, and contribute to the open spatial web.</p>
+    <p>Spatial computing is transitioning from experimental to infrastructural — AI glasses, spatial browsers, and location-anchored digital experiences are becoming mainstream. The OSCP Certification Program exists to train and credentialize the practitioners who will build this future using open, interoperable standards rather than proprietary silos.</p>
+    <p>The program is structured in three progressive levels, each building on the last, and maps directly to the technology stack defined in the Open Spatial Computing Platform (OSCP) specification maintained by OARC.</p>
+
+    <div class="callout">
+      <strong>Standards basis:</strong> All three levels are aligned with OGC GeoPose, OSCP protocol specifications, and the Metaverse Standards Forum (MSF) Real/Virtual World Integration Working Group guidelines. Certified practitioners are recognized as standards-literate contributors to the open spatial ecosystem.
+    </div>
+
+    <h3>Target Audience</h3>
+    <p>The program is designed for a broad audience at different points in their spatial computing journey:</p>
+    <ul>
+      <li><strong>Students & educators</strong> — high school through university, especially STEM and computer science programs</li>
+      <li><strong>Developers & engineers</strong> — building location-based AR/XR applications</li>
+      <li><strong>Architects & platform leads</strong> — designing interoperable spatial systems at scale</li>
+      <li><strong>Industry professionals</strong> — in tourism, urban planning, smart cities, retail, and education transitioning into spatial computing roles</li>
+      <li><strong>Researchers & academics</strong> — working in ubiquitous computing, HCI, geospatial systems, and related fields</li>
+    </ul>
+
+    <h3>Issuing Authority</h3>
+    <p>All certificates are issued exclusively by the <strong>Open AR Cloud Association (OARC)</strong> — the global non-profit driving open, interoperable AR Cloud technology. Delivery partners (including XR Masters / MyGeoVerse and Augmented City) may co-deliver curriculum but do not appear as co-issuers on certificates. This ensures consistent global credibility and standards independence.</p>
+  </div>
+
+  <!-- §2 LEVELS SUMMARY -->
+  <div class="section" id="levels">
+    <div class="section-label">Section 02</div>
+    <h2>Certification Level Summary</h2>
+
+    <div class="levels-grid">
+      <div class="level-card l1">
+        <div class="level-num">Level 01 · Foundations</div>
+        <div class="level-title">OSCP Foundations</div>
+        <div class="level-credential">Credential: OSCP-F</div>
+        <p>Awareness-level understanding of the spatial web, AR Cloud, open standards, and first hands-on experience deploying spatial content. Designed for students, newcomers, and professionals entering spatial computing.</p>
+        <div class="level-meta">
+          <div class="meta-row"><span class="meta-label">Duration</span><span class="meta-val">4 hours (1 day)</span></div>
+          <div class="meta-row"><span class="meta-label">Format</span><span class="meta-val">Instructor-led</span></div>
+          <div class="meta-row"><span class="meta-label">Prerequisites</span><span class="meta-val">None</span></div>
+          <div class="meta-row"><span class="meta-label">Assessment</span><span class="meta-val">Quiz + Demo</span></div>
+          <div class="meta-row"><span class="meta-label">Status</span><span class="meta-val" style="color:var(--l1)">✓ Ready</span></div>
+        </div>
+      </div>
+      <div class="level-card l2">
+        <div class="level-num">Level 02 · Builder</div>
+        <div class="level-title">OSCP Builder</div>
+        <div class="level-credential">Credential: OSCP-B</div>
+        <p>Practitioner-level competency in building standards-compliant spatial experiences. Covers VPS integration, GeoPose implementation, spatial content pipelines, and deploying real-world AR Cloud applications.</p>
+        <div class="level-meta">
+          <div class="meta-row"><span class="meta-label">Duration</span><span class="meta-val">3 days (24 hrs)</span></div>
+          <div class="meta-row"><span class="meta-label">Format</span><span class="meta-val">Workshop + Project</span></div>
+          <div class="meta-row"><span class="meta-label">Prerequisites</span><span class="meta-val">OSCP-F</span></div>
+          <div class="meta-row"><span class="meta-label">Assessment</span><span class="meta-val">Project + Oral</span></div>
+          <div class="meta-row"><span class="meta-label">Status</span><span class="meta-val" style="color:var(--l2)">In Design</span></div>
+        </div>
+      </div>
+      <div class="level-card l3">
+        <div class="level-num">Level 03 · Architect</div>
+        <div class="level-title">OSCP Architect</div>
+        <div class="level-credential">Credential: OSCP-A</div>
+        <p>Expert-level mastery of open spatial computing architecture. Covers platform design, multi-VPS interoperability, standards contribution, ecosystem leadership, and building production spatial infrastructure at scale.</p>
+        <div class="level-meta">
+          <div class="meta-row"><span class="meta-label">Duration</span><span class="meta-val">5 days (40 hrs)</span></div>
+          <div class="meta-row"><span class="meta-label">Format</span><span class="meta-val">Intensive + Thesis</span></div>
+          <div class="meta-row"><span class="meta-label">Prerequisites</span><span class="meta-val">OSCP-B + Project</span></div>
+          <div class="meta-row"><span class="meta-label">Assessment</span><span class="meta-val">Thesis + Review</span></div>
+          <div class="meta-row"><span class="meta-label">Status</span><span class="meta-val" style="color:var(--l3)">Planned</span></div>
+        </div>
+      </div>
+    </div>
+
+    <h3>Progression Pathway</h3>
+    <div class="pathway-diagram">
+      <div class="path-step l1">
+        <div class="path-level">Level 1</div>
+        <div class="path-name">Foundations</div>
+        <div class="path-cert">OSCP-F · 4 hours · No prereqs</div>
+      </div>
+      <div class="path-step l2">
+        <div class="path-level">Level 2</div>
+        <div class="path-name">Builder</div>
+        <div class="path-cert">OSCP-B · 3 days · Requires OSCP-F</div>
+      </div>
+      <div class="path-step l3">
+        <div class="path-level">Level 3</div>
+        <div class="path-name">Architect</div>
+        <div class="path-cert">OSCP-A · 5 days · Requires OSCP-B + Project</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- §3 LEVEL 1 -->
+  <div class="section" id="level1">
+    <div class="section-label">Section 03</div>
+    <h2>Level 1 — OSCP Foundations (OSCP-F)</h2>
+
+    <p>The Foundations level is the entry point to the OSCP Certification Program. It is derived from the full OARC tutorial delivered at UbiComp ISWC 2025 (Aalto University, Finland) and expanded to a complete 4-hour single-day format. It is designed to be accessible to anyone — no programming or AR experience required.</p>
+
+    <h3>Learning Objectives</h3>
+    <p>Upon successful completion, participants will be able to:</p>
+    <ul>
+      <li>Explain the spatial web vision and distinguish it from existing AR/VR approaches</li>
+      <li>Describe the role and structure of the Open AR Cloud and OSCP platform</li>
+      <li>Define OGC GeoPose and explain why a universal pose reference standard matters</li>
+      <li>Explain how Visual Positioning Systems (VPS) work and name at least two implementations</li>
+      <li>Navigate the MyGeoVerse platform and deploy a geolocated AR object</li>
+      <li>Describe the difference between GPS-level and VPS-level localization accuracy</li>
+      <li>Demonstrate awareness of interoperability challenges in current spatial ecosystems</li>
+    </ul>
+
+    <div class="level-detail l1">
+      <div class="level-detail-header">
+        <div>
+          <div class="level-num" style="color:var(--l1); font-family:var(--font-mono); font-size:0.65rem; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:0.3rem;">Full Day Schedule</div>
+          <h3>Level 1 Session Plan — 4 Hours</h3>
+        </div>
+        <span class="duration-pill">4:00 total</span>
+      </div>
+      <div class="level-detail-body">
+        <table class="session-table">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Session</th>
+              <th>Topics Covered</th>
+              <th>Presenter / Role</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>0:00</td>
+              <td>Welcome & Introduction</td>
+              <td>Program overview, OARC mission, what participants will build today</td>
+              <td>Program Lead</td>
+            </tr>
+            <tr>
+              <td>0:10</td>
+              <td>Spatial Web Basics</td>
+              <td>Vision of the spatial web; post-smartphone era; state of AR today; key challenges — proprietary fragmentation, no shared coordinate system</td>
+              <td>OARC / MGV</td>
+            </tr>
+            <tr>
+              <td>0:25</td>
+              <td>OGC GeoPose Standard</td>
+              <td>What is a pose? Pose reference systems; why a universal reference frame matters; OGC GeoPose specification overview; real-world anchoring vs. relative positioning</td>
+              <td>OARC / MGV</td>
+            </tr>
+            <tr>
+              <td>0:45</td>
+              <td>OSCP Platform Introduction</td>
+              <td>Building blocks of the Open Spatial Computing Platform; spatial content discovery; POI service; Globe Viewer (Cesium + Google Earth); how OSCP ties components together</td>
+              <td>OARC</td>
+            </tr>
+            <tr>
+              <td>1:05</td>
+              <td>Visual Positioning Systems</td>
+              <td>How VPS works (image matching, point clouds, 3D maps); accuracy comparison — GPS (5–50m) vs. VPS (10–20cm); introduction to Augmented City VPS; demo of point cloud creation; OARC GeoPose interoperability protocol between VPS providers</td>
+              <td>Augmented City</td>
+            </tr>
+            <tr class="break-row">
+              <td>1:50</td>
+              <td colspan="3">☕ Break — 20 minutes (live demo showcase optional)</td>
+            </tr>
+            <tr>
+              <td>2:10</td>
+              <td>Spatial Discovery & Platform Components</td>
+              <td>Spatial search; content authoring workflow; content placement and anchoring; positioning basics; the MyGeoVerse platform as an OSCP-compliant publishing tool</td>
+              <td>MGV / OARC</td>
+            </tr>
+            <tr>
+              <td>2:30</td>
+              <td>Hands-On: Build Your First AR Experience</td>
+              <td>Participants deploy a geolocated AR object using MyGeoVerse; GPS-anchoring; introduction to VPS-anchoring; QR marker backup; live coding / no-code walkthrough; AI-assisted 3D asset creation introduction</td>
+              <td>MGV (facilitated)</td>
+            </tr>
+            <tr>
+              <td>3:20</td>
+              <td>Live AR Demo & Showcase</td>
+              <td>Participants view each other's deployed AR experiences via web and mobile spatial browsers; peer review; instructor feedback</td>
+              <td>All / Participants</td>
+            </tr>
+            <tr>
+              <td>3:45</td>
+              <td>Assessment & Wrap-Up</td>
+              <td>20-question quiz; submit demo evidence; certification overview; next steps to Level 2</td>
+              <td>Program Lead</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <h3>Core Competencies Assessed — Level 1</h3>
+    <table class="comp-table">
+      <thead>
+        <tr><th>Competency Domain</th><th>Skills & Knowledge</th><th>Assessment Method</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Spatial Web Literacy</td>
+          <td>Explain spatial web vision; identify limitations of current AR ecosystems; describe the role of open standards</td>
+          <td>Quiz (multiple choice)</td>
+        </tr>
+        <tr>
+          <td>GeoPose Awareness</td>
+          <td>Define OGC GeoPose; distinguish pose types; explain why shared reference frames enable interoperability</td>
+          <td>Quiz (short answer)</td>
+        </tr>
+        <tr>
+          <td>VPS Fundamentals</td>
+          <td>Explain how visual positioning works; compare GPS vs. VPS accuracy; name at least one OSCP-compliant VPS</td>
+          <td>Quiz (multiple choice)</td>
+        </tr>
+        <tr>
+          <td>OSCP Platform Knowledge</td>
+          <td>Identify OSCP platform components; describe spatial discovery and content placement workflow</td>
+          <td>Quiz (scenario-based)</td>
+        </tr>
+        <tr>
+          <td>Hands-On Deployment</td>
+          <td>Successfully deploy a geolocated AR object using MyGeoVerse; provide screenshot/video evidence</td>
+          <td>Demo submission</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="assessment-box">
+      <h4>Assessment Requirements — Level 1 (OSCP-F)</h4>
+      <ul>
+        <li><strong>Part A — Knowledge Quiz:</strong> 20 questions (multiple choice + 2 short answer). Passing score: <strong>70%</strong>. Administered digitally at end of session.</li>
+        <li><strong>Part B — Practical Demo:</strong> Submit screenshot or 30-second screen recording of a deployed, geolocated AR experience. Must include visible GPS coordinates confirming real-world placement.</li>
+        <li><strong>Certificate issued:</strong> Within 5 business days of passing both parts. Delivered digitally with a unique credential ID and OARC verification link.</li>
+        <li><strong>Retake policy:</strong> One free retake per part within 30 days. Subsequent retakes: $25 admin fee.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- §4 LEVEL 2 -->
+  <div class="section" id="level2">
+    <div class="section-label">Section 04</div>
+    <h2>Level 2 — OSCP Builder (OSCP-B)</h2>
+
+    <p>The Builder level takes practitioners from awareness to production. Participants build fully functional, standards-compliant spatial experiences from scratch — integrating VPS, implementing GeoPose, working with the spARcl web client, and deploying real AR Cloud applications. This level is currently in curriculum design; the framework below defines intended scope.</p>
+
+    <div class="level-detail l2">
+      <div class="level-detail-header">
+        <div>
+          <div class="level-num" style="color:var(--l2); font-family:var(--font-mono); font-size:0.65rem; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:0.3rem;">3-Day Workshop</div>
+          <h3>Level 2 Curriculum Outline</h3>
+        </div>
+        <span class="duration-pill">24 hrs · 3 days</span>
+      </div>
+      <div class="level-detail-body">
+        <table class="session-table">
+          <thead>
+            <tr><th>Day</th><th>Module</th><th>Topics</th><th>Outcome</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Day 1</td>
+              <td>VPS Deep Dive & Integration</td>
+              <td>Point cloud creation workflow; Augmented City SDK (iOS, Android, Unity); OARC GeoPose Protocol implementation; cross-VPS interoperability testing</td>
+              <td>Working VPS map of a real location</td>
+            </tr>
+            <tr>
+              <td>Day 1</td>
+              <td>GeoPose Implementation</td>
+              <td>OGC GeoPose data structures; implementing GeoPose in a spatial application; coordinate frame transformations; validating pose accuracy</td>
+              <td>GeoPose-compliant position feed</td>
+            </tr>
+            <tr>
+              <td>Day 2</td>
+              <td>Spatial Content Pipeline</td>
+              <td>3D asset creation & optimization; OSCP content authoring API; spatial discovery protocol (SSD); multi-platform content delivery (web, mobile, glasses)</td>
+              <td>Published spatial content via OSCP API</td>
+            </tr>
+            <tr>
+              <td>Day 2</td>
+              <td>spARcl Web Client Development</td>
+              <td>Introduction to spARcl open-source AR browser; OSCP protocol integration in code; AR content rendering & localized placement; customizing spatial browsers</td>
+              <td>Custom spARcl-based AR experience</td>
+            </tr>
+            <tr>
+              <td>Day 3</td>
+              <td>Project Build Sprint</td>
+              <td>Participants design and build a complete AR Cloud application: real-world location mapping, OSCP content deployment, cross-device testing, documentation</td>
+              <td>Deployed, documented AR application</td>
+            </tr>
+            <tr>
+              <td>Day 3</td>
+              <td>Project Presentation & Assessment</td>
+              <td>Live demo to instructors and peers; oral Q&A on technical decisions; standards compliance review; written reflection on interoperability approach</td>
+              <td>Assessment completion</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4 style="margin-top:1.5rem;">Core Competencies — Level 2</h4>
+        <table class="comp-table">
+          <thead><tr><th>Domain</th><th>Skills</th></tr></thead>
+          <tbody>
+            <tr><td>VPS Engineering</td><td>Create and manage spatial maps; integrate at least one OSCP-compliant VPS SDK; test cross-VPS localization</td></tr>
+            <tr><td>GeoPose Implementation</td><td>Write code that produces and consumes GeoPose-compliant position data; handle coordinate transformations correctly</td></tr>
+            <tr><td>OSCP Protocol Integration</td><td>Use OSCP spatial discovery API; publish and retrieve spatial content programmatically; understand protocol spec</td></tr>
+            <tr><td>Spatial App Development</td><td>Build a working AR application using spARcl or equivalent; deploy to at least one real-world location</td></tr>
+            <tr><td>Standards Documentation</td><td>Write a brief technical report documenting interoperability decisions made in their project</td></tr>
+          </tbody>
+        </table>
+
+        <div class="assessment-box">
+          <h4>Assessment Requirements — Level 2 (OSCP-B)</h4>
+          <ul>
+            <li><strong>Part A — Project Submission:</strong> Complete, deployed AR Cloud application with source code, documentation, and live demo. Must use at least one OSCP standard (GeoPose or OSCP-SSD).</li>
+            <li><strong>Part B — Oral Review:</strong> 20-minute technical interview with two OARC-certified reviewers. Assesses depth of understanding and standards rationale.</li>
+            <li><strong>Passing threshold:</strong> Project: 75% rubric score. Oral: Pass/Fail by consensus of both reviewers.</li>
+            <li><strong>Prerequisite:</strong> Valid OSCP-F certificate (not expired).</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- §5 LEVEL 3 -->
+  <div class="section" id="level3">
+    <div class="section-label">Section 05</div>
+    <h2>Level 3 — OSCP Architect (OSCP-A)</h2>
+
+    <p>The Architect level is the expert credential in open spatial computing. It is designed for senior practitioners who are ready to design, lead, and contribute to the open spatial ecosystem at scale — including platform architecture, standards contribution, and ecosystem development. Curriculum is planned; the framework below defines intended scope.</p>
+
+    <div class="level-detail l3">
+      <div class="level-detail-header">
+        <div>
+          <div class="level-num" style="color:var(--l3); font-family:var(--font-mono); font-size:0.65rem; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:0.3rem;">5-Day Intensive</div>
+          <h3>Level 3 Curriculum Outline</h3>
+        </div>
+        <span class="duration-pill">40 hrs · 5 days</span>
+      </div>
+      <div class="level-detail-body">
+        <table class="session-table">
+          <thead>
+            <tr><th>Day</th><th>Module</th><th>Topics</th><th>Outcome</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Day 1</td>
+              <td>AR Cloud Platform Architecture</td>
+              <td>Designing city-scale spatial platforms; edge computing and 5G integration; multi-tenant AR Cloud infrastructure; scalability and fault tolerance patterns</td>
+              <td>Architecture design document</td>
+            </tr>
+            <tr>
+              <td>Day 2</td>
+              <td>Advanced VPS & Mapping</td>
+              <td>Multi-VPS federation; indoor + outdoor seamless positioning; SLAM and photogrammetry deep dive; managing and updating large-scale point cloud databases</td>
+              <td>City-block VPS deployment plan</td>
+            </tr>
+            <tr>
+              <td>Day 3</td>
+              <td>Standards Contribution & Governance</td>
+              <td>OGC standards development process; how to contribute to OSCP specification; Metaverse Standards Forum working group participation; writing interoperability profiles</td>
+              <td>Draft standards contribution</td>
+            </tr>
+            <tr>
+              <td>Day 4</td>
+              <td>Ecosystem Integration</td>
+              <td>Integrating with smart city infrastructure; digital twins and spatial data; connecting spatial platforms to IoT, 5G edge, and sensor networks; privacy and data sovereignty</td>
+              <td>Integration architecture diagram</td>
+            </tr>
+            <tr>
+              <td>Day 5</td>
+              <td>Thesis Defense</td>
+              <td>Participants present a spatial computing architecture thesis — a complete system design for a real-world deployment scenario, with full standards compliance documentation</td>
+              <td>Thesis + oral defense</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h4 style="margin-top:1.5rem;">Core Competencies — Level 3</h4>
+        <table class="comp-table">
+          <thead><tr><th>Domain</th><th>Skills</th></tr></thead>
+          <tbody>
+            <tr><td>Platform Architecture</td><td>Design a production-grade, multi-tenant AR Cloud platform; select and justify component choices; address scalability and resilience</td></tr>
+            <tr><td>Advanced VPS</td><td>Design multi-VPS federated deployments; plan indoor/outdoor positioning continuity; manage large-scale spatial map lifecycle</td></tr>
+            <tr><td>Standards Leadership</td><td>Demonstrate knowledge of OGC, OSCP, and MSF governance; draft a standards contribution or interoperability profile</td></tr>
+            <tr><td>Ecosystem Integration</td><td>Design integrations with smart city systems, digital twins, or IoT infrastructure using open spatial standards</td></tr>
+            <tr><td>Thesis Quality</td><td>Produce a comprehensive, peer-reviewed spatial computing architecture document suitable for publication or deployment</td></tr>
+          </tbody>
+        </table>
+
+        <div class="assessment-box">
+          <h4>Assessment Requirements — Level 3 (OSCP-A)</h4>
+          <ul>
+            <li><strong>Part A — Architecture Thesis:</strong> A 20–30 page spatial computing architecture document covering a real deployment scenario. Must include standards compliance mapping, VPS strategy, and integration architecture.</li>
+            <li><strong>Part B — Peer Review Panel:</strong> 45-minute defense before a panel of three OARC-certified Architects or OARC board members. Panel votes Pass/Fail by majority.</li>
+            <li><strong>Additional requirement:</strong> Demonstrate active contribution to the spatial computing ecosystem (open-source contribution, published research, or standards body participation).</li>
+            <li><strong>Prerequisite:</strong> Valid OSCP-B + at least one completed production deployment as lead developer.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- §6 ASSESSMENT -->
+  <div class="section" id="assessment">
+    <div class="section-label">Section 06</div>
+    <h2>Assessment & Certification Process</h2>
+
+    <h3>Certificate Validity & Renewal</h3>
+    <table class="gov-table">
+      <thead><tr><th>Credential</th><th>Validity</th><th>Renewal Method</th></tr></thead>
+      <tbody>
+        <tr><td>OSCP-F (Foundations)</td><td>3 years</td><td>Retake quiz or complete Level 2 (automatically renews L1)</td></tr>
+        <tr><td>OSCP-B (Builder)</td><td>3 years</td><td>Submit a new qualifying project OR complete Level 3</td></tr>
+        <tr><td>OSCP-A (Architect)</td><td>5 years</td><td>Demonstrate continued contribution to standards / ecosystem + brief renewal interview</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Certificate Format</h3>
+    <p>All certificates are issued digitally and include:</p>
+    <ul>
+      <li>Recipient full name and certification level</li>
+      <li>Unique credential ID (format: <code style="font-family:var(--font-mono); font-size:0.85em; background:#f1f5f9; padding:0.1rem 0.4rem; border-radius:3px;">OSCP-F-2026-XXXXX</code>)</li>
+      <li>Issue date and expiry date</li>
+      <li>OARC seal and authorized signature</li>
+      <li>QR code linking to OARC's public verification registry</li>
+      <li>Standards bodies recognized (OGC GeoPose, OSCP, MSF)</li>
+    </ul>
+    <p>A physical certificate print option will be available for Level 3 (OSCP-A) holders.</p>
+
+    <h3>Verification Registry</h3>
+    <p>OARC will maintain a public-facing verification registry at <strong>openarcloud.org/verify</strong> where any third party can confirm the validity and level of a certificate using the credential ID or QR code. This ensures employer and institution trust without requiring applicants to share documents.</p>
+  </div>
+
+  <!-- §7 DELIVERY -->
+  <div class="section" id="delivery">
+    <div class="section-label">Section 07</div>
+    <h2>Delivery Formats</h2>
+
+    <table class="gov-table">
+      <thead><tr><th>Format</th><th>Levels</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>In-Person Workshop</td>
+          <td><span class="tag tag-l1">L1</span> <span class="tag tag-l2">L2</span> <span class="tag tag-l3">L3</span></td>
+          <td>Delivered at schools, universities, conferences, and OARC partner events. Instructor-led with live demos. Recommended for L1 at high school / university level.</td>
+        </tr>
+        <tr>
+          <td>Online Live (Synchronous)</td>
+          <td><span class="tag tag-l1">L1</span> <span class="tag tag-l2">L2</span></td>
+          <td>Instructor-led via video conference. Hands-on portions completed remotely using cloud-based tools. Assessment administered via digital platform.</td>
+        </tr>
+        <tr>
+          <td>Self-Paced Online</td>
+          <td><span class="tag tag-l1">L1</span></td>
+          <td>Pre-recorded video modules + interactive exercises. Quiz administered upon completion. Demo submission required. Available via OARC learning portal (planned).</td>
+        </tr>
+        <tr>
+          <td>Conference Tutorial</td>
+          <td><span class="tag tag-l1">L1</span></td>
+          <td>Condensed format for academic conferences (3.5–4 hrs). Mirrors the UbiComp ISWC 2025 format. Certificate issued post-event upon passing the online quiz.</td>
+        </tr>
+        <tr>
+          <td>School Testbed Program</td>
+          <td><span class="tag tag-l1">L1</span></td>
+          <td>Delivered through the OARC/MGV/Augmented City Joint Testbed Program. Integrated into the 3-week build sprint. L1 certificate issued at sprint completion.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Authorized Delivery Partners</h3>
+    <p>Organizations wishing to deliver OSCP Certification content must be authorized by OARC. Delivery partner requirements:</p>
+    <ul>
+      <li>At least one certified OSCP-B holder (for L1 delivery) or OSCP-A holder (for L2/L3 delivery) on the delivery team</li>
+      <li>Use of OARC-approved curriculum materials (slides, exercises, assessment questions)</li>
+      <li>Submit participant assessment results to OARC for certificate issuance</li>
+      <li>Annual delivery partner review and renewal</li>
+    </ul>
+    <p>Current authorized delivery partners: <strong>XR Masters / MyGeoVerse</strong> (L1, L2), <strong>Augmented City</strong> (L1 VPS modules).</p>
+  </div>
+
+  <!-- §8 GOVERNANCE -->
+  <div class="section" id="governance">
+    <div class="section-label">Section 08</div>
+    <h2>Governance & Standards Alignment</h2>
+
+    <h3>Issuing Authority</h3>
+    <table class="gov-table">
+      <thead><tr><th>Role</th><th>Responsibility</th><th>Organization</th></tr></thead>
+      <tbody>
+        <tr><td>Certificate Issuer</td><td>Issues all certificates; maintains credential registry; owns curriculum standards</td><td>Open AR Cloud Association</td></tr>
+        <tr><td>Curriculum Committee</td><td>Reviews and approves curriculum updates annually; ensures standards alignment</td><td>OARC Board + invited experts</td></tr>
+        <tr><td>Assessment Oversight</td><td>Manages quiz question bank; trains oral reviewers; handles appeals</td><td>OARC Technical Director</td></tr>
+        <tr><td>Delivery Partners</td><td>Deliver curriculum under OARC license; submit results; cannot alter assessment</td><td>XR Masters/MGV, Augmented City, others</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Standards Alignment</h3>
+    <table class="gov-table">
+      <thead><tr><th>Standard</th><th>Body</th><th>Relevant Levels</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>OGC GeoPose 1.0</td>
+          <td>Open Geospatial Consortium</td>
+          <td><span class="tag tag-l1">L1</span> <span class="tag tag-l2">L2</span> <span class="tag tag-l3">L3</span></td>
+        </tr>
+        <tr>
+          <td>OSCP Specification</td>
+          <td>Open AR Cloud Association</td>
+          <td><span class="tag tag-l1">L1</span> <span class="tag tag-l2">L2</span> <span class="tag tag-l3">L3</span></td>
+        </tr>
+        <tr>
+          <td>MSF Real/Virtual World Integration</td>
+          <td>Metaverse Standards Forum</td>
+          <td><span class="tag tag-l2">L2</span> <span class="tag tag-l3">L3</span></td>
+        </tr>
+        <tr>
+          <td>OSCP GeoPose Protocol (VPS interop)</td>
+          <td>Open AR Cloud Association</td>
+          <td><span class="tag tag-l1">L1</span> <span class="tag tag-l2">L2</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <strong>MSF Forum Labs Pathway:</strong> Schools and organizations that complete the Level 1 testbed program and subsequently certify at least 5 participants at OSCP-B are eligible to apply for Metaverse Standards Forum Forum Labs Partnership — placing them on the global map of recognized spatial computing education institutions.
+    </div>
+  </div>
+
+  <!-- §9 ROADMAP -->
+  <div class="section" id="roadmap">
+    <div class="section-label">Section 09</div>
+    <h2>Rollout Roadmap</h2>
+
+    <table class="gov-table">
+      <thead><tr><th>Phase</th><th>Timeline</th><th>Milestones</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>Phase 1 — L1 Launch</td>
+          <td>Q2–Q3 2026</td>
+          <td>Finalize L1 curriculum; design certificate template; build assessment platform; pilot with 3 testbed schools; launch public registration</td>
+        </tr>
+        <tr>
+          <td>Phase 2 — L1 Scale</td>
+          <td>Q3–Q4 2026</td>
+          <td>Deploy L1 through conference tutorial circuit; onboard 10+ delivery partners; launch self-paced online version; issue first 100 OSCP-F certificates</td>
+        </tr>
+        <tr>
+          <td>Phase 3 — L2 Design</td>
+          <td>Q3 2026</td>
+          <td>Finalize L2 curriculum with OARC technical committee; develop VPS integration lab materials; build oral review panel and rubrics; pilot L2 with selected cohort</td>
+        </tr>
+        <tr>
+          <td>Phase 4 — L2 Launch</td>
+          <td>Q1 2027</td>
+          <td>Public L2 registration; first OSCP-B certificates issued; open applications for L3 design committee</td>
+        </tr>
+        <tr>
+          <td>Phase 5 — L3 Design & Launch</td>
+          <td>Q2–Q3 2027</td>
+          <td>L3 curriculum design; thesis framework; panel recruitment; first OSCP-A cohort (invite-only); public launch Q4 2027</td>
+        </tr>
+        <tr>
+          <td>Phase 6 — Verification Registry</td>
+          <td>Q2 2026</td>
+          <td>Launch openarcloud.org/verify; integrate QR verification into all certificates; connect to LinkedIn credential API</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="doc-footer">
+    <div>
+      <div>Open AR Cloud Association</div>
+      <div>OSCP Certification Program Framework v1.0</div>
+      <div>© 2026 OARC — All rights reserved</div>
+    </div>
+    <div style="text-align:right;">
+      <div>Prepared in collaboration with XR Masters / MyGeoVerse</div>
+      <div>and Augmented City</div>
+      <div>openarcloud.org</div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
