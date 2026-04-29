@@ -3,9 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MyGeoVerse Platform — Spatial AR Modules</title>
-<meta name="description" content="MyGeoVerse is the modular spatial AR platform that powers location-aware experiences across mobile, AI smart glasses, and mixed reality devices.">
-<link rel="canonical" href="https://frontend.mygeoverse.com/">
+<title>ContextGeoVerse — GeoSpatial Context Engineering</title>
+<meta name="description" content="ContextGeoVerse turns high-traffic venues, tourist destinations, sports arenas, and city centres into AI-aware spatial environments — connecting venues, visitors, and local businesses through precision spatial infrastructure and a location-based commerce engine.">
 <link href="https://fonts.googleapis.com/css2?family=Sarala:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -75,17 +74,11 @@
     display: none; background: none; border: none; cursor: pointer;
     padding: 6px; flex-direction: column; gap: 5px;
   }
-  .nav-burger span {
-    display: block; width: 24px; height: 2px;
-    background: var(--text-dark); border-radius: 2px;
-  }
+  .nav-burger span { display: block; width: 24px; height: 2px; background: var(--text-dark); border-radius: 2px; }
 
   /* ── HERO ── */
   .hero-wrap { background: var(--dark-hero); padding: 88px 40px 80px; }
-  .hero {
-    max-width: 1200px; margin: 0 auto;
-    opacity: 0; animation: fadeUp 0.8s ease 0.1s forwards;
-  }
+  .hero { max-width: 1200px; margin: 0 auto; opacity: 0; animation: fadeUp 0.8s ease 0.1s forwards; }
 
   .eyebrow {
     display: inline-flex; align-items: center; gap: 10px;
@@ -93,8 +86,7 @@
     color: var(--accent); font-weight: 700; margin-bottom: 24px;
   }
   .eyebrow::before, .eyebrow::after {
-    content: ''; display: block;
-    width: 22px; height: 1px; background: var(--accent); opacity: 0.5;
+    content: ''; display: block; width: 22px; height: 1px; background: var(--accent); opacity: 0.5;
   }
 
   h1 {
@@ -148,48 +140,12 @@
   .page { max-width: 1200px; margin: 0 auto; padding: 0 40px 80px; }
   .divider { height: 1px; background: var(--border); margin: 60px 0; }
 
-  .section-eyebrow {
-    font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
-    color: var(--accent); font-weight: 700; margin-bottom: 10px;
-  }
-  .section-title {
-    font-size: clamp(26px, 3vw, 38px); font-weight: 700;
-    color: var(--text-dark); line-height: 1.14; margin-bottom: 14px;
-  }
+  .section-eyebrow { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-bottom: 10px; }
+  .section-title { font-size: clamp(26px, 3vw, 38px); font-weight: 700; color: var(--text-dark); line-height: 1.14; margin-bottom: 14px; }
   .section-sub { font-size: 15px; color: var(--text); line-height: 1.72; max-width: 580px; }
 
-  /* ── DEVICES ── */
-  .devices-section { margin-bottom: 76px; opacity: 0; animation: fadeUp 0.7s ease 0.05s forwards; }
-  .devices-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 22px; margin-top: 38px; }
-
-  .device-card {
-    background: var(--white); border: 1px solid var(--border);
-    border-radius: var(--radius); padding: 34px 28px;
-    box-shadow: var(--shadow); border-bottom: 3px solid var(--border);
-    transition: transform 0.25s, box-shadow 0.25s;
-  }
-  .device-card:hover { transform: translateY(-3px); box-shadow: 0 8px 32px rgba(0,0,0,0.1); }
-  .dc1 { border-bottom-color: var(--primary); }
-  .dc2 { border-bottom-color: var(--accent); }
-  .dc3 { border-bottom-color: var(--secondary); }
-
-  .device-icon { font-size: 32px; margin-bottom: 16px; display: block; }
-  .device-card h3 { font-size: 16px; font-weight: 700; color: var(--text-dark); margin-bottom: 9px; }
-  .device-card p { font-size: 13px; color: var(--text); line-height: 1.68; margin-bottom: 18px; }
-  .device-specs { display: flex; flex-direction: column; gap: 7px; }
-  .device-spec { font-size: 12px; color: var(--text); display: flex; align-items: center; gap: 8px; }
-  .device-spec::before {
-    content: ''; width: 5px; height: 5px; border-radius: 50%;
-    background: var(--primary); flex-shrink: 0;
-  }
-  .dc2 .device-spec::before { background: var(--accent); }
-  .dc3 .device-spec::before { background: var(--secondary); }
-
   /* ── MODULE SECTIONS ── */
-  .module-section {
-    margin-bottom: 76px;
-    opacity: 0; animation: fadeUp 0.7s ease forwards;
-  }
+  .module-section { margin-bottom: 76px; opacity: 0; animation: fadeUp 0.7s ease forwards; }
   .module-section:nth-child(1) { animation-delay: 0.08s; }
   .module-section:nth-child(2) { animation-delay: 0.13s; }
   .module-section:nth-child(3) { animation-delay: 0.18s; }
@@ -212,7 +168,7 @@
   }
   .module-header-text p { font-size: 15px; color: var(--text); line-height: 1.72; max-width: 700px; }
 
-  /* ── FEATURE CARDS ── */
+  /* ── FEATURE GRID & CARDS ── */
   .features-grid { display: grid; gap: 18px; }
   .features-grid.cols-2 { grid-template-columns: 1fr 1fr; }
   .features-grid.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
@@ -225,19 +181,13 @@
   }
   .feature-card:hover {
     border-color: rgba(22,102,158,0.28);
-    box-shadow: 0 8px 32px rgba(22,102,158,0.1);
+    box-shadow: 0 8px 32px rgba(22,102,158,0.10);
     transform: translateY(-3px);
   }
 
   .feat-icon { font-size: 28px; margin-bottom: 14px; }
-  .feat-label {
-    font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
-    font-weight: 700; color: var(--primary); margin-bottom: 6px;
-  }
-  .feature-card h3 {
-    font-size: 15px; font-weight: 700; color: var(--text-dark);
-    margin-bottom: 9px; line-height: 1.35;
-  }
+  .feat-label { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 700; color: var(--primary); margin-bottom: 6px; }
+  .feature-card h3 { font-size: 15px; font-weight: 700; color: var(--text-dark); margin-bottom: 9px; line-height: 1.35; }
   .feature-card p { font-size: 13px; color: var(--text); line-height: 1.68; flex: 1; }
 
   .tag {
@@ -248,21 +198,138 @@
   .tag-live { background: rgba(22,102,158,0.08); border: 1px solid rgba(22,102,158,0.2); color: var(--primary); }
   .tag-coming { background: rgba(236,102,37,0.08); border: 1px solid rgba(236,102,37,0.25); color: var(--accent); }
 
+  /* ── SERVICE TIER CARDS ── */
+  .tiers-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 10px; }
+
+  .tier-card {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 34px 28px;
+    box-shadow: var(--shadow); border-top: 3px solid transparent;
+    transition: transform 0.25s, box-shadow 0.25s;
+    display: flex; flex-direction: column;
+  }
+  .tier-card:hover { transform: translateY(-3px); box-shadow: 0 8px 32px rgba(0,0,0,0.10); }
+  .tc1 { border-top-color: var(--primary); }
+  .tc2 { border-top-color: var(--secondary); }
+  .tc3 { border-top-color: var(--accent); }
+
+  .tier-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .tc1 .tier-badge { color: var(--primary); }
+  .tc2 .tier-badge { color: var(--secondary); }
+  .tc3 .tier-badge { color: var(--accent); }
+  .tier-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
+
+  .tier-card h3 { font-size: 22px; font-weight: 700; color: var(--text-dark); letter-spacing: -0.01em; margin-bottom: 10px; }
+  .tier-card .tier-desc { font-size: 13px; color: var(--text); line-height: 1.68; margin-bottom: 22px; flex: 1; }
+
+  .tier-accuracy { display: flex; align-items: baseline; gap: 6px; margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
+  .accuracy-num { font-size: 28px; font-weight: 700; letter-spacing: -0.01em; }
+  .tc1 .accuracy-num { color: var(--primary); }
+  .tc2 .accuracy-num { color: var(--secondary); }
+  .tc3 .accuracy-num { color: var(--accent); }
+  .accuracy-label { font-size: 12px; color: var(--text); }
+
+  .tier-features { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+  .tier-features li { font-size: 12px; color: var(--text); display: flex; align-items: flex-start; gap: 8px; line-height: 1.5; }
+  .tier-features li::before { content: ''; width: 5px; height: 5px; border-radius: 50%; margin-top: 5px; flex-shrink: 0; }
+  .tc1 .tier-features li::before { background: var(--primary); }
+  .tc2 .tier-features li::before { background: var(--secondary); }
+  .tc3 .tier-features li::before { background: var(--accent); }
+
+  /* ── COMMERCE ENGINE EXPLAINER ── */
+  .explainer-card {
+    background: var(--light-bg); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 40px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 48px;
+    margin-bottom: 22px; box-shadow: var(--shadow);
+  }
+  .explainer-card h3 { font-size: 18px; font-weight: 700; color: var(--secondary); margin-bottom: 14px; }
+  .explainer-card > div > p { font-size: 13px; color: var(--text); line-height: 1.75; margin-bottom: 10px; }
+
+  /* ── LOGIC STEPS ── */
+  .logic-steps { display: flex; flex-direction: column; gap: 8px; margin-top: 16px; }
+  .logic-step {
+    display: flex; align-items: flex-start; gap: 14px;
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: 9px; padding: 11px 16px;
+  }
+  .step-num {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.06em;
+    color: var(--white); background: var(--primary); border-radius: var(--pill);
+    padding: 3px 10px; flex-shrink: 0; margin-top: 2px;
+  }
+  .step-text { font-size: 12px; color: var(--text); line-height: 1.6; }
+  .step-text strong { color: var(--text-dark); font-weight: 700; }
+
+  /* ── PRIVACY NOTE ── */
+  .privacy-note {
+    margin-top: 16px; padding: 16px 18px;
+    background: rgba(22,102,158,0.05); border: 1px solid rgba(22,102,158,0.15);
+    border-radius: 9px;
+  }
+  .privacy-note .feat-label { color: var(--primary); margin-bottom: 6px; }
+  .privacy-note p { font-size: 12px; color: var(--text); line-height: 1.7; margin: 0; }
+
+  /* ── REVENUE MODEL CARDS ── */
+  .revenue-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin-top: 32px; }
+
+  .rev-card {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 22px 18px;
+    box-shadow: var(--shadow); border-top: 3px solid var(--accent);
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .rev-card:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(0,0,0,0.1); }
+  .rev-model { font-size: 20px; font-weight: 700; color: var(--accent); letter-spacing: -0.01em; margin-bottom: 6px; }
+  .rev-name { font-size: 13px; font-weight: 700; color: var(--text-dark); margin-bottom: 8px; }
+  .rev-desc { font-size: 12px; color: var(--text); line-height: 1.65; }
+
+  /* ── VERTICALS GRID ── */
+  .verticals-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 32px; }
+
+  .vert-card {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 28px 24px;
+    box-shadow: var(--shadow);
+    transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+  }
+  .vert-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 32px rgba(22,102,158,0.10);
+    border-color: rgba(22,102,158,0.22);
+  }
+  .vert-icon { font-size: 28px; margin-bottom: 14px; display: block; }
+  .vert-card h3 { font-size: 15px; font-weight: 700; color: var(--text-dark); margin-bottom: 8px; }
+  .vert-card p { font-size: 13px; color: var(--text); line-height: 1.68; }
+
+  /* ── STATS ROW ── */
+  .stats-row {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    background: var(--dark-hero); border-radius: var(--radius);
+    overflow: hidden; margin-bottom: 72px;
+    opacity: 0; animation: fadeUp 0.7s ease 0.15s forwards;
+  }
+  .stat-cell {
+    padding: 36px 28px; text-align: center;
+    border-right: 1px solid rgba(255,255,255,0.08);
+  }
+  .stat-cell:last-child { border-right: none; }
+  .stat-num { font-size: 36px; font-weight: 700; color: var(--accent); letter-spacing: -0.02em; margin-bottom: 8px; }
+  .stat-label { font-size: 12px; color: rgba(255,255,255,0.55); line-height: 1.5; }
+
   /* ── CTA ── */
   .cta-section {
     background: var(--dark-hero); border-radius: var(--radius);
     padding: 72px 64px; text-align: center;
     opacity: 0; animation: fadeUp 0.7s ease 0.15s forwards;
   }
-  .cta-section h2 {
-    font-size: clamp(26px, 3vw, 40px); font-weight: 700;
-    color: var(--white); margin-bottom: 14px;
-  }
+  .cta-section h2 { font-size: clamp(26px, 3vw, 40px); font-weight: 700; color: var(--white); margin-bottom: 14px; }
   .cta-section h2 em { font-style: normal; color: var(--accent); }
-  .cta-section p {
-    font-size: 15px; color: rgba(255,255,255,0.7); line-height: 1.75;
-    max-width: 480px; margin: 0 auto 34px;
-  }
+  .cta-section p { font-size: 15px; color: rgba(255,255,255,0.7); line-height: 1.75; max-width: 480px; margin: 0 auto 34px; }
   .cta-buttons { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
 
   /* ── FOOTER ── */
@@ -275,53 +342,39 @@
   }
 
   .footer-brand img.brand-logo { height: 48px; margin-bottom: 20px; display: block; }
-  .footer-brand p {
-    font-size: 13px; color: rgba(255,255,255,0.5);
-    line-height: 1.75; max-width: 280px; margin-bottom: 24px;
-  }
+  .footer-brand p { font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.75; max-width: 280px; margin-bottom: 24px; }
 
-  /* App download box: badges left, QR right */
   .app-download-box {
     display: grid;
-    grid-template-columns: 1fr auto;
+    grid-template-columns: auto auto;
     grid-template-rows: auto auto;
     gap: 10px;
     align-items: center;
     background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.1);
     border-radius: var(--radius);
-    padding: 14px 16px;
-    width: 100%;
-    max-width: 280px;
+    padding: 16px;
+    width: fit-content;
   }
   .app-badge-link {
     display: block; text-decoration: none;
     transition: opacity 0.2s; grid-column: 1;
   }
   .app-badge-link:hover { opacity: 0.8; }
-  .app-badge-link img { height: 38px; width: auto; display: block; object-fit: contain; }
+  .app-badge-link img { height: 36px; display: block; }
   .app-qr {
     grid-column: 2; grid-row: 1 / span 2;
     display: flex; align-items: center; justify-content: center;
-    padding-left: 12px; border-left: 1px solid rgba(255,255,255,0.12);
+    padding-left: 10px; border-left: 1px solid rgba(255,255,255,0.1);
   }
-  .app-qr img { width: 76px; height: 76px; display: block; border-radius: 6px; background: #fff; padding: 4px; }
+  .app-qr img { width: 80px; height: 80px; display: block; border-radius: 6px; }
 
-  .footer-col h4 {
-    font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
-    font-weight: 700; color: rgba(255,255,255,0.35); margin-bottom: 20px;
-  }
+  .footer-col h4 { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 700; color: rgba(255,255,255,0.35); margin-bottom: 20px; }
   .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
-  .footer-col ul li a {
-    font-size: 13px; color: rgba(255,255,255,0.55);
-    text-decoration: none; transition: color 0.2s;
-  }
+  .footer-col ul li a { font-size: 13px; color: rgba(255,255,255,0.55); text-decoration: none; transition: color 0.2s; }
   .footer-col ul li a:hover { color: var(--white); }
 
-  .footer-social h4 {
-    font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
-    font-weight: 700; color: rgba(255,255,255,0.35); margin-bottom: 20px;
-  }
+  .footer-social h4 { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 700; color: rgba(255,255,255,0.35); margin-bottom: 20px; }
   .social-links { display: flex; gap: 10px; margin-bottom: 28px; }
   .social-link {
     width: 38px; height: 38px; border-radius: 50%;
@@ -354,6 +407,7 @@
   /* ── RESPONSIVE ── */
   @media (max-width: 1024px) {
     .footer-inner { grid-template-columns: 1fr 1fr; }
+    .revenue-grid { grid-template-columns: repeat(3, 1fr); }
   }
   @media (max-width: 768px) {
     .nav-inner { padding: 0 20px; height: 72px; }
@@ -363,7 +417,11 @@
     .page { padding: 0 24px 60px; }
     h1 { font-size: 30px; }
     .features-grid.cols-2, .features-grid.cols-3 { grid-template-columns: 1fr; }
-    .devices-grid { grid-template-columns: 1fr; }
+    .tiers-grid { grid-template-columns: 1fr; }
+    .revenue-grid { grid-template-columns: 1fr 1fr; }
+    .verticals-grid { grid-template-columns: 1fr; }
+    .explainer-card { grid-template-columns: 1fr; gap: 28px; padding: 28px; }
+    .stats-row { grid-template-columns: 1fr 1fr; }
     .cta-section { padding: 48px 28px; }
     .footer-wrap { padding: 48px 24px 0; }
     .footer-inner { grid-template-columns: 1fr; gap: 32px; }
@@ -381,8 +439,8 @@
       <img src="images/MGV_logo_blue.png" alt="MyGeoVerse">
     </a>
     <div class="nav-right">
-      <a href="https://dashboard.mygeoverse.com" class="nav-login">Login</a>
-      <a href="https://www.mygeoverse.com/platform/for-creators-testers/#testers" class="nav-cta">Get Beta Access</a>
+      <a href="https://www.mygeoverse.com/company/contact-us/" class="nav-login">Contact Us</a>
+      <a href="https://www.mygeoverse.com/company/contact-us/" class="nav-cta">Book a Briefing</a>
     </div>
     <button class="nav-burger" aria-label="Menu">
       <span></span><span></span><span></span>
@@ -393,21 +451,21 @@
 <!-- HERO -->
 <div class="hero-wrap" id="platform">
   <div class="hero">
-    <div class="eyebrow">Spatial AR Platform</div>
-    <h1>The Operating System<br>for <em>Spatial Experiences</em></h1>
+    <div class="eyebrow">Location-Aware AI for High-Traffic Venues</div>
+    <h1>Your venue. Your visitors.<br>Your AI — <em>geospatially aware.</em></h1>
     <p class="hero-sub">
-      MyGeoVerse is the modular platform that lets operators, developers, and venue owners build, manage, and monetize location-aware AR experiences — across mobile devices, AI smart glasses, and mixed reality hardware.
+      MyGeoVerse turns tourist destinations, sports arenas, museums, and city centres into AI-aware environments — where every agent and application understands exactly where it is and who it's talking to.
     </p>
     <div class="hero-actions">
-      <a href="https://www.mygeoverse.com/company/contact-us/" class="btn-primary">Request a Demo</a>
-      <a href="#modules" class="btn-ghost">Explore Modules</a>
+      <a href="https://www.mygeoverse.com/company/contact-us/" class="btn-primary">Book a Briefing</a>
+      <a href="#what-we-do" class="btn-ghost">Explore the Platform</a>
     </div>
     <div class="module-nav">
-      <a href="#m1" class="module-pill"><span class="dot" style="background:#16669E;"></span>Spatial Commerce Engine</a>
-      <a href="#m2" class="module-pill"><span class="dot" style="background:#EC6625;"></span>Spatial Navigation</a>
-      <a href="#m3" class="module-pill"><span class="dot" style="background:#16669E;"></span>Spatial Browser</a>
-      <a href="#m4" class="module-pill"><span class="dot" style="background:#EC6625; opacity:0.8;"></span>Content Management</a>
-      <a href="#m5" class="module-pill"><span class="dot" style="background:#084062;"></span>Spatial Payment</a>
+      <a href="#what-we-do"       class="module-pill"><span class="dot" style="background:#16669E;"></span>Infrastructure Layer</a>
+      <a href="#service-tiers"    class="module-pill"><span class="dot" style="background:#EC6625;"></span>Service Tiers</a>
+      <a href="#spatial-commerce" class="module-pill"><span class="dot" style="background:#16669E;"></span>Spatial Commerce Engine</a>
+      <a href="#for-business"     class="module-pill"><span class="dot" style="background:#EC6625; opacity:0.85;"></span>For Local Businesses</a>
+      <a href="#verticals"        class="module-pill"><span class="dot" style="background:#084062;"></span>Target Verticals</a>
     </div>
   </div>
 </div>
@@ -417,229 +475,317 @@
 
   <div class="divider"></div>
 
-  <!-- DEVICES — moved to top -->
-  <section class="devices-section" id="devices">
-    <div class="section-eyebrow">Hardware Support</div>
-    <div class="section-title">Built for the devices<br>visitors already carry</div>
-    <p class="section-sub">Every MyGeoVerse module is architected to run across the current and next generation of spatial hardware — with no rebuild required as the device landscape evolves.</p>
-    <div class="devices-grid">
-      <div class="device-card dc1">
-        <span class="device-icon">📱</span>
-        <h3>Mobile AR</h3>
-        <p>Full-featured spatial experiences on the device in every visitor's pocket. Audio, visual, and interactive AR — no headset required.</p>
-        <div class="device-specs">
-          <div class="device-spec">iOS (iPhone)</div>
-          <div class="device-spec">Android</div>
-          <div class="device-spec">All modules supported</div>
-          <div class="device-spec">Available now</div>
-        </div>
-      </div>
-      <div class="device-card dc2">
-        <span class="device-icon">🕶️</span>
-        <h3>Ray-Ban Meta Smart Glasses</h3>
-        <p>Hands-free, voice-driven AI companion experiences. No screen, no friction — just conversation-led guidance layered onto the real world.</p>
-        <div class="device-specs">
-          <div class="device-spec">Ray-Ban Meta (all models)</div>
-          <div class="device-spec">Voice-first interaction</div>
-          <div class="device-spec">Spatial Browser, Navigation, Commerce, Payment</div>
-          <div class="device-spec" style="color:var(--accent); font-weight:700;">Coming Soon</div>
-        </div>
-      </div>
-      <div class="device-card dc3">
-        <span class="device-icon">🥽</span>
-        <h3>Android XR</h3>
-        <p>Full mixed reality deployment on Android's open XR platform. Immersive overlays, persistent spatial content, and AI agent interaction in true mixed reality.</p>
-        <div class="device-specs">
-          <div class="device-spec">Android XR headsets</div>
-          <div class="device-spec">Full MR spatial overlay</div>
-          <div class="device-spec">Spatial Browser, Navigation, Commerce, Payment</div>
-          <div class="device-spec" style="color:var(--accent); font-weight:700;">Coming Soon</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="divider"></div>
-
-  <!-- MODULES -->
-  <section id="modules">
-
-    <!-- 01 Spatial Commerce Engine -->
-    <div class="module-section m1" id="m1">
+  <!-- 01 THREE-LAYER MODEL -->
+  <section id="what-we-do">
+    <div class="module-section m1">
       <div class="module-header">
         <div class="module-number">01</div>
         <div class="module-header-text">
-          <h2>Spatial Commerce Engine <span class="tag tag-coming" style="font-size:10px; vertical-align:middle;">Coming Soon</span></h2>
-          <p>Your venue's physical layer becomes an intelligent commerce surface. MyGeoVerse's Spatial Commerce Engine combines real-time location intelligence with AI-driven recommendations — turning every square metre into a revenue opportunity for operators and a discovery engine for visitors.</p>
-        </div>
-      </div>
-      <div class="features-grid cols-2">
-        <div class="feature-card">
-          <div class="feat-icon">🎯</div>
-          <div class="feat-label">AI Recommendations</div>
-          <h3>Sponsored Recommendations</h3>
-          <p>The MyGeoVerse recommendation engine analyzes visitor location, movement patterns, dwell time, and contextual signals in real time — surfacing hyper-relevant sponsored content at precisely the right moment. Advertisers reach audiences who are already physically present and engaged, making every impression intentional, immersive, and measurable. The engine learns continuously, improving relevance and conversion with every visit across your entire venue.</p>
-          <span class="tag tag-coming">Coming Soon</span>
-        </div>
-        <div class="feature-card">
-          <div class="feat-icon">🛑</div>
-          <div class="feat-label">Commerce</div>
-          <h3>AR Stops</h3>
-          <p>Define interactive AR destinations throughout your venue — product showcases, sponsored moments, exclusive unlocks. Visitors discover them naturally as they move through your space. Operators monetize every stop.</p>
-          <span class="tag tag-coming">Coming Soon</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- 02 Spatial Navigation -->
-    <div class="module-section m2" id="m2">
-      <div class="module-header">
-        <div class="module-number">02</div>
-        <div class="module-header-text">
-          <h2>Spatial Navigation Module</h2>
-          <p>Guide visitors through any physical environment with precision AR wayfinding. From simple point-to-point journeys to full spatial mesh navigation — choose the level of fidelity your venue demands.</p>
-        </div>
-      </div>
-      <div class="features-grid cols-2">
-        <div class="feature-card">
-          <div class="feat-icon">🧭</div>
-          <div class="feat-label">AR Wayfinding</div>
-          <h3>Point-to-Point Navigation</h3>
-          <p>Define curated paths through your venue using the MyGeoVerse Navigation Tool and Scene Creation module. Visitors follow AR overlays from origin to destination — no complex 3D collision mesh required. Ideal for airports, museums, retail, and events.</p>
-          <span class="tag tag-live">Mobile Only</span>
-        </div>
-        <div class="feature-card">
-          <div class="feat-icon">🗺️</div>
-          <div class="feat-label">Advanced Navigation</div>
-          <h3>AR Navigation w/ Collision Mesh</h3>
-          <p>For venues that demand full spatial accuracy. Collision mesh-based navigation dynamically accounts for walls, floors, and physical obstacles — delivering real-world pathfinding across mobile and AI glasses platforms.</p>
-          <span class="tag tag-live">All Platforms</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- 03 Spatial Browser -->
-    <div class="module-section m3" id="m3">
-      <div class="module-header">
-        <div class="module-number">03</div>
-        <div class="module-header-text">
-          <h2>Spatial Browser Module</h2>
-          <p>The foundation of every MyGeoVerse deployment. Define how visitors enter your spatial world — with your brand identity, your visual language, and your story front and center from the very first interaction.</p>
+          <h2>The Three-Layer Model</h2>
+          <p>ContextGeoVerse delivers three compounding layers of value. Each layer is independently deployable — and each one makes the layer above it more powerful.</p>
         </div>
       </div>
       <div class="features-grid cols-3">
         <div class="feature-card">
-          <div class="feat-icon">🏷️</div>
-          <div class="feat-label">White Label</div>
-          <h3>App Licensing</h3>
-          <p>Deploy MyGeoVerse under your own brand. Your name in the app stores, your icon on the home screen. Full white-label licensing across iOS and Android, with your identity owning the entire experience.</p>
-          <span class="tag tag-live">Available Now</span>
-        </div>
-        <div class="feature-card">
-          <div class="feat-icon">🎨</div>
-          <div class="feat-label">Location-Based Branding</div>
-          <h3>Custom Logo &amp; Opening Sliders</h3>
-          <p>Define the branded entry experience for each location. Your venue's logo and onboarding sliders are customized per site — so every deployment opens with the right identity for the right place.</p>
-          <span class="tag tag-live">Mobile Only</span>
-        </div>
-        <div class="feature-card">
-          <div class="feat-icon">📍</div>
-          <div class="feat-label">Localization Control</div>
-          <h3>Location-Based Localization Enforcement</h3>
-          <p>Enforce the precise localization method your venue requires based on where visitors are. Seamlessly switch between GPS, VPS, and Cloud Anchor depending on zone, coverage conditions, or operational need — no manual override required.</p>
-          <span class="tag tag-live">Mobile Only</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- 04 Spatial Content Management -->
-    <div class="module-section m4" id="m4">
-      <div class="module-header">
-        <div class="module-number">04</div>
-        <div class="module-header-text">
-          <h2>Spatial Content Management Module</h2>
-          <p>The creative and operational core of the platform. Upload, place, and manage spatially-anchored content from anywhere in the world — with AI creation tools, cloud-precision localization, and location-aware customization built in.</p>
-        </div>
-      </div>
-      <div class="features-grid cols-3">
-        <div class="feature-card">
-          <div class="feat-icon">📤</div>
-          <div class="feat-label">Content</div>
-          <h3>Uploading &amp; Placement</h3>
-          <p>Push 3D objects, video, audio, and interactive elements directly into your spatial scene. Place content visually — no 3D expertise required.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feat-icon">📡</div>
-          <div class="feat-label">GPS Anchoring</div>
-          <h3>Remote Placement</h3>
-          <p>Position spatial content remotely using GPS coordinates. Deploy to any location in the world without setting foot on-site during content management.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feat-icon">☁️</div>
-          <div class="feat-label">Precision</div>
-          <h3>VPS / Cloud Anchor Localization</h3>
-          <p>Sub-centimeter content persistence through Visual Positioning System and Cloud Anchor technology. Content stays exactly where you put it — every visit, every device.</p>
-        </div>
-        <div class="feature-card">
-          <div class="feat-icon">🎬</div>
-          <div class="feat-label">Creation Tool</div>
-          <h3>Creators Studio</h3>
-          <p>A powerful in-platform studio for building spatial scenes, defining interaction triggers, and composing immersive environments — without writing a single line of code.</p>
+          <div class="feat-icon">🌐</div>
+          <div class="feat-label">Layer 1 — Infrastructure</div>
+          <h3>GeoSpatial Context Engineering</h3>
+          <p>We seed your physical space with precision spatial data — GPS, VPS, and Cloud Anchor localization mapped to your venue's geometry. Every AI system, avatar, or device that enters can now perceive and interact with your space at centimetre-level accuracy.</p>
+          <span class="tag tag-live">Foundation Layer</span>
         </div>
         <div class="feature-card">
           <div class="feat-icon">🤖</div>
-          <div class="feat-label">AI Tools</div>
-          <h3>AI Agent Studio</h3>
-          <p>Train, configure, and deploy conversational AI agents directly within your spatial environment. Define your agent's knowledge base, persona, and behavior — all from within the platform.</p>
-          <span class="tag tag-coming">Coming Soon</span>
+          <div class="feat-label">Layer 2 — Intelligence</div>
+          <h3>AI-Powered Visitor Experience</h3>
+          <p>The spatial infrastructure feeds a recommendation engine that learns visitor behaviour, understands time constraints, reads location context, and delivers personalised guidance in real time — via mobile or AI glasses. Every visit gets smarter.</p>
+          <span class="tag tag-live">Recommendation Engine</span>
         </div>
         <div class="feature-card">
-          <div class="feat-icon">📍</div>
-          <div class="feat-label">Personalization</div>
-          <h3>Location-Based Customization</h3>
-          <p>Deliver different content, experiences, and messaging based on exactly where a visitor is standing. Zone-level personalization at scale — managed centrally.</p>
+          <div class="feat-icon">💰</div>
+          <div class="feat-label">Layer 3 — Commerce</div>
+          <h3>Spatial Commerce Marketplace</h3>
+          <p>Visitor engagement becomes a qualified lead pipeline. Local businesses pay to reach visitors at the exact moment and location where they are most likely to convert. Venues and cities become active, revenue-generating spatial networks.</p>
+          <span class="tag tag-coming">Launching 2025</span>
         </div>
       </div>
     </div>
-
-    <!-- 05 Spatial Payment -->
-    <div class="module-section m5" id="m5">
-      <div class="module-header">
-        <div class="module-number">05</div>
-        <div class="module-header-text">
-          <h2>Spatial Payment Module <span class="tag tag-coming" style="font-size:10px; vertical-align:middle;">Coming Soon</span></h2>
-          <p>Monetize the spatial layer directly. Give visitors a seamless way to transact inside your AR experience — whether through standard in-app purchases or a branded virtual currency ecosystem tied exclusively to your venue.</p>
-        </div>
-      </div>
-      <div class="features-grid cols-2">
-        <div class="feature-card">
-          <div class="feat-icon">💳</div>
-          <div class="feat-label">Transactions</div>
-          <h3>In-App Purchases</h3>
-          <p>Enable direct commerce within the spatial experience. Sell AR content, unlock exclusive experiences, or offer venue-specific products — all transacted natively within the MyGeoVerse environment across mobile and AI glasses.</p>
-          <span class="tag tag-coming">Coming Soon</span>
-        </div>
-        <div class="feature-card">
-          <div class="feat-icon">🪙</div>
-          <div class="feat-label">Virtual Economy</div>
-          <h3>In-App Currency</h3>
-          <p>Build a branded virtual currency ecosystem for your venue. Issue, manage, and redeem your own spatial tokens — driving repeat engagement, loyalty, and a self-contained economy that visitors keep coming back to spend.</p>
-          <span class="tag tag-coming">Coming Soon</span>
-        </div>
-      </div>
-    </div>
-
   </section>
 
   <div class="divider"></div>
 
+  <!-- 02 SERVICE TIERS -->
+  <section id="service-tiers">
+    <div class="module-section m2">
+      <div class="module-header">
+        <div class="module-number">02</div>
+        <div class="module-header-text">
+          <h2>Service Tiers</h2>
+          <p>Three levels of spatial infrastructure — from rapid GPS deployment to precision dual-device orchestration. Every tier is a foundation for the Spatial Commerce Engine above it.</p>
+        </div>
+      </div>
+
+      <div class="tiers-grid">
+        <div class="tier-card tc1">
+          <div class="tier-badge">Basic</div>
+          <h3>GPS-Based</h3>
+          <p class="tier-desc">Rapid, scalable entry-level deployment. Seed spatial content and AI context data remotely using GPS coordinates — no on-site visit required during setup. The fastest route to a live spatial layer.</p>
+          <div class="tier-accuracy">
+            <span class="accuracy-num">1–5m</span>
+            <span class="accuracy-label">positioning accuracy</span>
+          </div>
+          <ul class="tier-features">
+            <li>Remote content seeding via GPS coordinates</li>
+            <li>Outdoor wayfinding and AR content anchoring</li>
+            <li>Fast deployment — live in days not weeks</li>
+            <li>Tourism pilots and initial venue rollouts</li>
+            <li>Cost-effective for large outdoor areas</li>
+          </ul>
+        </div>
+
+        <div class="tier-card tc2">
+          <div class="tier-badge">Silver</div>
+          <h3>VPS / Anchor-Based</h3>
+          <p class="tier-desc">High-precision localization using Visual Positioning Systems and Cloud Anchors. Content stays exactly where you placed it — every device, every visit, every user. The standard for permanent venue deployments.</p>
+          <div class="tier-accuracy">
+            <span class="accuracy-num">10–20cm</span>
+            <span class="accuracy-label">positioning accuracy</span>
+          </div>
+          <ul class="tier-features">
+            <li>VPS (Visual Positioning System) mapping</li>
+            <li>Cloud Anchor persistent content placement</li>
+            <li>Multi-user consistency across all devices</li>
+            <li>Indoor and outdoor venue coverage</li>
+            <li>Cultural heritage, museums, retail, campuses</li>
+          </ul>
+        </div>
+
+        <div class="tier-card tc3">
+          <div class="tier-badge">Platinum</div>
+          <h3>Dual-Device Synchronized</h3>
+          <p class="tier-desc">The premium tier. AI glasses handle voice interaction and real-time audio guidance while a synced mobile Spatial Browser delivers AR visualisations — two devices acting as one seamless experience.</p>
+          <div class="tier-accuracy">
+            <span class="accuracy-num">10–20cm</span>
+            <span class="accuracy-label">real-time synchronized</span>
+          </div>
+          <ul class="tier-features">
+            <li>AI glasses for audio and conversational AI</li>
+            <li>Mobile Spatial Browser for AR visuals</li>
+            <li>Real-time dual-device synchronization</li>
+            <li>Premium tourism and enterprise training</li>
+            <li>Theme parks, museums, stadium experiences</li>
+          </ul>
+          <span class="tag tag-coming" style="margin-top: 18px; display: inline-block;">Phase 3 Rollout</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- 03 SPATIAL COMMERCE ENGINE -->
+  <section id="spatial-commerce">
+    <div class="module-section m3">
+      <div class="module-header">
+        <div class="module-number">03</div>
+        <div class="module-header-text">
+          <h2>Spatial Commerce Engine</h2>
+          <p>The world's first location-based recommendation marketplace — connecting visitors to the right businesses at the right moment, driven by AI that understands where they are, how much time they have, and what they actually want.</p>
+        </div>
+      </div>
+
+      <div class="explainer-card">
+        <div>
+          <h3>How the recommendation engine works</h3>
+          <p>Every visitor carries signals — their location within the venue, how long they have been there, how much time remains, their stated preferences, and their budget intent. The engine synthesises all of these in real time to deliver genuinely useful recommendations, not generic ads.</p>
+          <p>Visitors opt in to personalisation and can set spending budgets and category preferences from within the app — making every recommendation feel like advice from a trusted local guide.</p>
+          <div class="logic-steps">
+            <div class="logic-step">
+              <span class="step-num">01</span>
+              <span class="step-text"><strong>Location</strong> — where the visitor is right now, down to zone within the venue</span>
+            </div>
+            <div class="logic-step">
+              <span class="step-num">02</span>
+              <span class="step-text"><strong>Time</strong> — how long they have been here and how much visit time remains</span>
+            </div>
+            <div class="logic-step">
+              <span class="step-num">03</span>
+              <span class="step-text"><strong>Preference</strong> — stated interests and category settings configured by the visitor</span>
+            </div>
+            <div class="logic-step">
+              <span class="step-num">04</span>
+              <span class="step-text"><strong>Budget</strong> — optional spending intent — daily limits and per-category caps set by the visitor</span>
+            </div>
+            <div class="logic-step">
+              <span class="step-num">05</span>
+              <span class="step-text"><strong>Context</strong> — nearby businesses that are relevant, available, and bidding for this placement right now</span>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <h3>A two-sided marketplace</h3>
+          <p>The engine serves two audiences simultaneously. For visitors — personalised, trustworthy spatial guidance. For local businesses — a direct channel to reach the right person at the moment they are physically closest and most likely to act.</p>
+
+          <div class="features-grid" style="gap: 14px; margin-top: 16px;">
+            <div class="feature-card" style="padding: 22px;">
+              <div class="feat-label">Visitor Side</div>
+              <h3 style="font-size: 14px;">Smart spatial guidance</h3>
+              <p>Personalised recommendations via mobile AR or AI glasses. Budget controls, preference settings, and opt-in data — full transparency and control for the visitor at all times.</p>
+            </div>
+            <div class="feature-card" style="padding: 22px;">
+              <div class="feat-label">Business Side</div>
+              <h3 style="font-size: 14px;">AI-powered onboarding</h3>
+              <p>Local businesses sign up through a self-serve AI onboarding flow. No sales team required for standard accounts. Pay only for the results you choose — lead, action, view, or subscription.</p>
+            </div>
+          </div>
+
+          <div class="privacy-note">
+            <div class="feat-label">Privacy by design</div>
+            <p>All visitor data is opt-in, GDPR-compliant, and processed under explicit consent. Budget and preference controls are visitor-owned. This is a design requirement, not a compliance checkbox — and a core selling point for municipalities and public sector clients.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- 04 FOR LOCAL BUSINESSES -->
+  <section id="for-business">
+    <div class="module-section m4">
+      <div class="module-header">
+        <div class="module-number">04</div>
+        <div class="module-header-text">
+          <h2>For Local Businesses</h2>
+          <p>Five flexible revenue models let any local business — from an independent café to a hotel group — participate in the spatial commerce network at exactly the risk and commitment level that suits them.</p>
+        </div>
+      </div>
+
+      <div class="revenue-grid">
+        <div class="rev-card">
+          <div class="rev-model">CPL</div>
+          <div class="rev-name">Cost Per Lead</div>
+          <p class="rev-desc">Pay only when a visitor is referred to your business. Zero upfront cost. The lowest-risk entry into the network for independent operators and SMBs.</p>
+        </div>
+        <div class="rev-card">
+          <div class="rev-model">CPA</div>
+          <div class="rev-name">Cost Per Action</div>
+          <p class="rev-desc">Pay when a referred visitor completes a defined action — a booking, purchase, or redemption. Highest confidence in ROI for conversion-focused campaigns.</p>
+        </div>
+        <div class="rev-card">
+          <div class="rev-model">CPV</div>
+          <div class="rev-name">Per View</div>
+          <p class="rev-desc">Pay for spatial impressions — contextual AR brand placement delivered to relevant visitors in your area. Suited to awareness campaigns and large retail brands.</p>
+        </div>
+        <div class="rev-card">
+          <div class="rev-model">SUB</div>
+          <div class="rev-name">Subscription</div>
+          <p class="rev-desc">Fixed monthly presence in the spatial network — guaranteed placement within your category and location zone. Best value for established anchor businesses.</p>
+        </div>
+        <div class="rev-card">
+          <div class="rev-model">SPO</div>
+          <div class="rev-name">Sponsorship</div>
+          <p class="rev-desc">Premium venue-level or zone-level sponsorship — exclusive spatial branding within defined areas. Suited to tourism boards, government authorities, and major brand partners.</p>
+        </div>
+      </div>
+
+      <div class="features-grid cols-2" style="margin-top: 18px;">
+        <div class="feature-card">
+          <div class="feat-icon">🤖</div>
+          <div class="feat-label">Business Onboarding</div>
+          <h3>AI-Assisted Self-Serve Sign-Up</h3>
+          <p>A dedicated AI guides new businesses through the entire onboarding process — venue zone selection, budget setting, campaign configuration, and revenue model choice. Standard accounts are live within 24 hours with no human intervention required.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feat-icon">📊</div>
+          <div class="feat-label">Analytics Dashboard</div>
+          <h3>Real-Time Performance Visibility</h3>
+          <p>Every business account includes a live analytics dashboard — impressions served, leads generated, actions completed, and conversion rates broken down by location zone, time of day, and visitor profile category. No black-box reporting.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- 05 VERTICALS -->
+  <section id="verticals">
+    <div class="module-section m5">
+      <div class="module-header">
+        <div class="module-number">05</div>
+        <div class="module-header-text">
+          <h2>Built for High-Traffic Venues</h2>
+          <p>ContextGeoVerse is designed for environments where large numbers of people move through a defined physical space — and where connecting them to relevant services has measurable commercial and operational value.</p>
+        </div>
+      </div>
+
+      <div class="verticals-grid">
+        <div class="vert-card">
+          <span class="vert-icon">🏛️</span>
+          <h3>Tourism &amp; Cultural Heritage</h3>
+          <p>Historic city centres, archaeological sites, and visitor attractions. AI-guided tours, multilingual support, contextual storytelling, and local business discovery layered onto the physical environment.</p>
+        </div>
+        <div class="vert-card">
+          <span class="vert-icon">🏟️</span>
+          <h3>Sports Arenas &amp; Event Venues</h3>
+          <p>Stadiums, concert halls, exhibition centres, and festival grounds. Pre-event navigation, in-venue commerce, sponsor activations, and post-event discovery — all delivered spatially during peak footfall.</p>
+        </div>
+        <div class="vert-card">
+          <span class="vert-icon">🎨</span>
+          <h3>Museums &amp; Cultural Institutions</h3>
+          <p>Art galleries, science museums, heritage sites, and national collections. Layered contextual content, educational AI guides, accessibility tools, and visitor commerce — without replacing the physical experience.</p>
+        </div>
+        <div class="vert-card">
+          <span class="vert-icon">🏙️</span>
+          <h3>Municipalities &amp; Smart Cities</h3>
+          <p>City centres, public squares, tourist districts, and pedestrian zones. Authorities gain a managed spatial infrastructure that connects citizens and visitors to local services — with full data sovereignty and GDPR compliance built in.</p>
+        </div>
+        <div class="vert-card">
+          <span class="vert-icon">🛍️</span>
+          <h3>Retail &amp; Shopping Destinations</h3>
+          <p>Shopping malls, high streets, and mixed-use districts. Zone-level personalisation, in-venue navigation, AR product discovery, and a commerce engine that drives measurable footfall to individual stores.</p>
+        </div>
+        <div class="vert-card">
+          <span class="vert-icon">🚢</span>
+          <h3>Enterprise, Cruise &amp; Hospitality</h3>
+          <p>Corporate campuses, cruise ship decks, hotel groups, and resort complexes. White-label spatial platforms licensed to operators — custom AI agents, branded experiences, and integrated revenue streams.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- STATS -->
+  <div class="stats-row">
+    <div class="stat-cell">
+      <div class="stat-num">10cm</div>
+      <div class="stat-label">Positioning Accuracy<br>Silver &amp; Platinum Tiers</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-num">5</div>
+      <div class="stat-label">Business Revenue Models<br>CPL to Sponsorship</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-num">3</div>
+      <div class="stat-label">Service Tiers<br>Basic, Silver, Platinum</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-num">24h</div>
+      <div class="stat-label">Business Onboarding<br>AI-Assisted, Self-Serve</div>
+    </div>
+  </div>
+
   <!-- CTA -->
   <section class="cta-section" id="contact">
-    <h2>Ready to build your <em>spatial layer?</em></h2>
-    <p>Talk to the MyGeoVerse team about your venue, your use case, and which modules fit your vision. We'll scope it, deploy it, and support it.</p>
+    <h2>Ready to make your venue <em>spatially intelligent?</em></h2>
+    <p>Talk to the ContextGeoVerse team about your venue, your footfall, and your commercial goals. We'll scope the right tier, map the infrastructure, and show you what the commerce engine can generate.</p>
     <div class="cta-buttons">
-      <a href="https://www.mygeoverse.com/company/contact-us/" class="btn-primary">Talk to the Team</a>
-      <a href="packages.html" class="btn-ghost">View Packages</a>
+      <a href="https://www.mygeoverse.com/company/contact-us/" class="btn-primary">Book a Briefing</a>
+      <a href="https://www.mygeoverse.com/company/contact-us/" class="btn-ghost">Partner Enquiry</a>
     </div>
   </section>
 
@@ -652,13 +798,12 @@
     <!-- Brand -->
     <div class="footer-brand">
       <img src="images/MGV_logo.png" alt="MyGeoVerse" class="brand-logo">
-      <p>MyGeoVerse is the modular spatial AR platform powering location-aware experiences across mobile, AI glasses, and mixed reality devices.</p>
-      <!-- App download box: badges left, QR right -->
+      <p>ContextGeoVerse is the GeoSpatial Context Engineering division of XR Masters / MyGeoVerse — turning high-traffic venues into AI-aware spatial environments.</p>
       <div class="app-download-box">
-        <a href="https://apps.apple.com/jm/app/mygeoverse/id6443591665" target="_blank" rel="noopener" class="app-badge-link">
+        <a href="https://apps.apple.com" target="_blank" rel="noopener" class="app-badge-link">
           <img src="images/appstore-mgv.webp" alt="Download on the App Store">
         </a>
-        <a href="https://play.google.com/store/apps/details?id=com.mygeoverse.platform&hl=en&gl=US" target="_blank" rel="noopener" class="app-badge-link">
+        <a href="https://play.google.com" target="_blank" rel="noopener" class="app-badge-link">
           <img src="images/googleplay-mgv.webp" alt="Get it on Google Play">
         </a>
         <div class="app-qr">
@@ -667,16 +812,15 @@
       </div>
     </div>
 
-    <!-- Platform links -->
+    <!-- Services links -->
     <div class="footer-col">
-      <h4>Platform</h4>
+      <h4>Services</h4>
       <ul>
-        <li><a href="https://www.mygeoverse.com/platform/">What is MyGeoVerse</a></li>
-        <li><a href="https://www.mygeoverse.com/platform/for-creators-testers/">For Creators &amp; Testers</a></li>
-        <li><a href="https://www.mygeoverse.com/platform/testbed-program/">Testbed Program</a></li>
-        <li><a href="https://www.mygeoverse.com/platform/open-standards/">Open Standards</a></li>
-        <li><a href="#modules">Platform Modules</a></li>
-        <li><a href="packages.html">Packages</a></li>
+        <li><a href="#what-we-do">What We Do</a></li>
+        <li><a href="#service-tiers">Service Tiers</a></li>
+        <li><a href="#spatial-commerce">Spatial Commerce Engine</a></li>
+        <li><a href="#for-business">For Local Businesses</a></li>
+        <li><a href="#verticals">Target Verticals</a></li>
       </ul>
     </div>
 
@@ -684,10 +828,11 @@
     <div class="footer-col">
       <h4>Company</h4>
       <ul>
+        <li><a href="https://www.mygeoverse.com/platform/">MyGeoVerse Platform</a></li>
         <li><a href="https://www.mygeoverse.com/company/about-us/">About Us</a></li>
         <li><a href="https://www.mygeoverse.com/company/contact-us/">Contact Us</a></li>
+        <li><a href="https://www.mygeoverse.com/platform/open-standards/">Open Standards</a></li>
         <li><a href="https://dashboard.mygeoverse.com">Platform Login</a></li>
-        <li><a href="https://www.mygeoverse.com/solutions/">Solutions</a></li>
       </ul>
     </div>
 
@@ -699,7 +844,7 @@
         <a href="https://www.twitter.com" target="_blank" rel="noopener" class="social-link" aria-label="Twitter">𝕏</a>
         <a href="https://www.youtube.com" target="_blank" rel="noopener" class="social-link" aria-label="YouTube">▶</a>
       </div>
-      <p>Join the MyGeoVerse community and start exploring, creating, and testing geospatial AR content today.</p>
+      <p>Join the MyGeoVerse ecosystem and start building geospatially aware AI experiences for your venue today.</p>
     </div>
 
   </div>
@@ -708,7 +853,7 @@
   <div class="footer-bottom">
     <div class="footer-bottom-left">
       <img src="images/XRM_logo.png" alt="XR Masters">
-      <p>© 2026 MyGeoVerse. All Rights Reserved.</p>
+      <p>© 2026 XR Masters / MyGeoVerse. All Rights Reserved.</p>
     </div>
     <ul class="footer-legal">
       <li><a href="https://www.mygeoverse.com/privacy-policy/">Privacy Policy</a></li>
